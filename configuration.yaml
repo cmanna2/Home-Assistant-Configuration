@@ -1,0 +1,664 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 42.0664
+  longitude: -87.9373
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 203
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Chicago
+  customize:
+    media_player.living_room:
+      friendly_name: Living Room Chromecast
+    media_player.roku_1gh33k009150:
+      friendly_name: Living Room Roku
+    switch.kitchen_hallway_switch_7_0:
+      friendly_name: Kitchen Hallway Light
+    light.living_room:
+      friendly_name: Living Room Light
+    light.kitchen_lights_level_5_0:
+      friendly_name: Kitchen Lights
+    light.kitchen_sink_light_level_4_0:
+      friendly_name: Kitchen Sink Light
+    light.dining_room_light_level_6_0:
+      friendly_name: Dining Room Light
+    light.front_basement_lights_level_9_0:
+      friendly_name: Front Basement Lights
+    light.rear_basement_lights_level_8_0:
+      friendly_name: Back Basement Lights
+    light.side_door_light_level_11_0:
+      friendly_name: Side Door Light
+    light.backyard_lights_level_13_0:
+      friendly_name: Backyard Lights
+    light.aeotec_zw098_led_bulb_level_2_0:
+      friendly_name: Porch Light
+    light.pendant_lights_level_3_0:
+      friendly_name: Pendant Light
+    switch.wemo_switch:
+      friendly_name: Mayas Basement Light
+    media_player.kitchen:
+      friendly_name: Kitchen Sonos
+      icon: mdi:speaker-wireless
+    media_player.basement:
+      friendly_name: Basement Sonos
+      icon: mdi:speaker-wireless
+    media_player.basement_vizio:
+      friendly_name: Vizio Cast
+      icon: mdi:cast
+    binary_sensor.kitchen_nest_protect_online:
+      friendly_name: Kitchen Protect
+      icon: mdi:nest-protect
+    binary_sensor.upstairs_nest_protect_online:
+      friendly_name: Kitchen Protect
+      icon: mdi:nest-protect
+    scene.netflix_and_chill:
+      icon: mdi:sofa
+      friendly_name: Movie Scene
+    scene.goodnight:
+      icon: mdi:hotel
+    scene.goodmorning:
+      icon: mdi:white-balance-sunny
+    scene.first_floor_nightlight:
+      icon: mdi:brightness-2
+    scene.outdoor:
+      icon: mdi:terrain
+
+# Enables the frontend
+frontend:
+
+http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+  include:
+    entities:
+      - sensor.living_room_temperature
+      - sensor.mannabee_temperature
+      - sensor.mayas_bedroom_temperature
+      - sensor.office_temperature
+      - sensor.kitchen_temperature
+      - sensor.downstairs_temperature
+      - sensor.mannabee_humidity
+      - light.aeotec_zw098_led_bulb_level_2_0
+      - light.pendant_lights_level_3_0
+      - light.kitchen_sink_light_level_4_0
+      - light.kitchen_lights_level_5_0
+      - light.dining_room_light_level_6_0
+      - light.rear_basement_lights_level_8_0
+      - light.front_basement_lights_level_9_0
+      - light.side_door_light_level_11_0
+      - light.living_room
+      - light.master_bedroom
+      - light.mayas_bedroom
+      - light.backyard_lights_level_13_0
+      - switch.wemo_switch
+      - switch.kitchen_hallway_switch_7_0
+      - automation.basement_lights_auto_off
+      - automation.good_morning
+      - automation.lights_off_at_sunrise
+      - automation.office_lights_auto_off
+      - automation.turn_on_lights_when_sun_sets
+      - binary_sensor.downstairs_occupancy
+      - binary_sensor.kitchen_occupancy
+      - binary_sensor.living_room_occupancy
+      - binary_sensor.mannabee_occupancy
+      - binary_sensor.mayas_bedroom_occupancy
+      - binary_sensor.office_occupancy
+      
+recorder:
+    purge_days: 10
+
+# View all events in a logbook
+logbook:
+  exclude:
+    entities:
+      - sensor.dark_sky_apparent_temperature
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_daily_high_temperature
+      - sensor.dark_sky_daily_low_temperature
+      - sensor.dark_sky_daily_summary
+      - sensor.dark_sky_dew_point
+      - sensor.dark_sky_hourly_summary
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_icon
+      - sensor.dark_sky_ozone
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_wind_speed
+  include:
+    domains:
+      - binary_sensor
+      - automation
+      - sensor
+      - light
+      - media_player
+      - switch
+
+# Track the sun
+sun:
+
+# Weather Prediction
+sensor:
+  - platform: yr
+  - platform: darksky
+    api_key: <private API Key>
+    monitored_conditions:
+      - summary
+      - icon
+      - precip_probability
+      - temperature
+      - apparent_temperature
+      - dew_point
+      - wind_speed
+      - wind_bearing
+      - cloud_cover
+      - humidity
+      - ozone
+      - hourly_summary
+      - daily_summary
+      - temperature_max
+      - temperature_min
+    update_interval: '01:00'
+  - platform: plex
+    host: <private IP>
+    port: 32400
+    username: <username>
+    password: <password>
+  - platform: template
+    sensors:
+      away_mode:
+        friendly_name: 'HVAC Mode'
+        value_template: "{{ states.climate.mannabee.attributes.away_mode }}"
+
+# Text to speech
+tts:
+  platform: google
+
+input_boolean:
+  trigger_first_morning:
+    name: Waiting for first morning motion
+    icon: mdi:kettle
+
+automation:
+  - alias: Enable First Morning Trigger
+    trigger:
+      - platform: time
+        after: '5:00'
+    action:
+      service: homeassistant.turn_on
+      entity_id: input_boolean.trigger_first_morning
+
+  - alias: Basement lights auto off
+    trigger:
+        platform: state
+        entity_id: binary_sensor.downstairs_occupancy
+        state: "off"
+    action:
+        service: homeassistant.turn_off
+        entity_id: light.rear_basement_lights_level_8_0, light.front_basement_lights_level_9_0, light.basement_stai$
+
+  - alias: Office lights auto off
+    trigger:
+        platform: state
+        entity_id: binary_sensor.office_occupancy
+        state: 'off'
+    action:
+        service: homeassistant.turn_off
+        entity_id: light.office_ceiling
+
+  - alias: Turn on lights when sun sets
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: sun
+        event: sunset
+    action:
+        service: homeassistant.turn_on
+        entity_id: light.living_room, scene.outdoor
+
+  - alias: Mayas Basement Light
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: state
+        entity_id: binary_sensor.downstairs_occupancy
+        state: "on"
+    action:
+        service: homeassistant.turn_on
+        entity_id: switch.wemo_switch
+
+  - alias: Lights off at sunrise
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: sun
+        event: sunrise
+    action:
+        service: light.turn_off
+        entity_id: light.side_door_light_level_11_0, light.aeotec_zw098_led_bulb_level_2_0, light.backyard_lights_l$
+
+  - alias: Mayas Night Light
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: time
+        after: '18:00'
+    action:
+        service: light.turn_on
+        entity_id: light.mayas_bedroom
+        
+  - alias: Goodnight
+    trigger:
+        platform: event
+        event_type: call_service
+        event_data:
+          service_data:
+            entity_id: scene.goodnight
+          domain: scene
+          service: turn_on
+    action:
+        service: climate.set_away_mode
+        data:
+          entity_id: climate.mannabee
+          away_mode: true
+
+  - alias: Good morning
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: state
+        entity_id: light.living_room
+        to: 'on'
+    condition:
+      - condition: state
+        entity_id: input_boolean.trigger_first_morning
+        state: 'on'
+    action:
+      - service: scene.turn_on
+        entity_id: scene.goodmorning
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.trigger_first_morning
+      - service: notify.mannapushbullet
+        data_template:
+          title: "Amanda is up!"
+
+  - alias: Plex Playing
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: state
+        entity_id: media_player.xr6m10
+        to: 'playing'
+    action:
+        service: scene.turn_on
+        entity_id: scene.netflix_and_chill
+    condition:
+        condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+  - alias: Plex Paused or Stopped
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: state
+        entity_id: media_player.xr6m10
+        from: 'playing'
+    action:
+        service: scene.turn_on
+        entity_id: scene.netflix_and_chill_paused
+    condition:
+        condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+  - alias: Away Mode
+    initial_state: True
+    hide_entity: False
+    trigger:
+        platform: state
+        entity_id: sensor.away_mode
+        to: 'on'
+    action:
+        service: scene.turn_on
+        entity_id: scene.away_scene
+    condition:
+        condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+scene:
+  - name: Away Scene
+    entities:
+        switch.kitchen_hallway_switch_7_0:
+            state: on
+        light.dining_room_light_level_6_0:
+            state: on
+            brightness: 50
+        light.kitchen_sink_light_level_4_0:
+            state: on
+            brightness: 50
+
+  - name: Netflix and Chill
+    entities:
+        light.rear_basement_lights_level_8_0:
+            state: on
+            brightness: 25
+        light.front_basement_lights_level_9_0: off
+        switch.kitchen_hallway_switch_7_0:
+            state: on
+        light.basement_accent:
+            state: on
+            brightness: 75
+        light.basement_stairs:
+            state: on
+            brightness: 50
+
+  - name: Netflix and Chill Paused
+    entities:
+        light.rear_basement_lights_level_8_0:
+            state: on
+            brightness: 25
+        light.front_basement_lights_level_9_0:
+            state: on
+            brightness: 30
+
+  - name: First Floor Nightlight
+    entities:
+        light.kitchen_sink_light_level_4_0:
+            state: on
+            brightness: 30
+        light.kitchen_accent:
+            state: on
+            brightness: 70
+        light.kitchen_lights_level_5_0: off
+        light.pendant_lights_level_3_0: off
+        light.dining_room_light_level_6_0:
+            state: on
+            brightness: 25
+
+  - name: Goodmorning
+    entities:
+        light.kitchen_lights_level_5_0:
+            state: on
+            brightness: 30
+        light.living_room:
+            state: on
+            brightness: 50
+        light.dining_room_light_level_6_0:
+            state: on
+            brightness: 30
+
+  - name: Goodnight
+    entities:
+        light.pendant_lights_level_3_0: off
+        light.kitchen_sink_light_level_4_0: off
+        light.kitchen_lights_level_5_0: off
+        light.dining_room_light_level_6_0: off
+        light.rear_basement_lights_level_8_0: off
+        light.front_basement_lights_level_9_0: off
+        light.kitchen_accent: off
+        light.basement_stairs: off
+        light.basement_accent: off
+        light.living_room: off
+        switch.kitchen_hallway_switch_7_0: off
+
+  - name: Outdoor
+    entities:
+        light.side_door_light_level_11_0:
+            state: on
+            brightness: 99
+        light.backyard_lights_level_13_0:
+            state: on
+            brightness: 20
+        light.aeotec_zw098_led_bulb_level_2_0:
+            state: on
+            brightness: 99
+
+group:
+####VIEWS
+  default_view:
+    entities:
+      - group.scenes
+      - group.rules
+      - group.weather
+      - group.media
+      - group.lights
+      - sensor.mannabee_temperature
+      - sensor.downstairs_temperature
+      - sensor.kitchen_temperature
+      - sensor.living_room_temperature
+      - sensor.mayas_bedroom_temperature
+      - sensor.office_temperature
+    view: true
+  groundfloor_view:
+    entities:
+      - group.livingroom
+      - group.kitchen
+      - sensor.mannabee_temperature
+      - sensor.downstairs_temperature
+      - sensor.kitchen_temperature
+      - sensor.living_room_temperature
+      - sensor.mayas_bedroom_temperature
+      - sensor.office_temperature
+    name: "Ground Floor"
+    view: true
+  basement_view:
+    entities:
+      - group.basement
+      - sensor.mannabee_temperature
+      - sensor.downstairs_temperature
+      - sensor.kitchen_temperature
+      - sensor.living_room_temperature
+      - sensor.mayas_bedroom_temperature
+      - sensor.office_temperature
+    name: "Basement"
+    view: true
+  upstairs_view:
+    entities:
+      - group.upstairs
+      - sensor.mannabee_temperature
+      - sensor.downstairs_temperature
+      - sensor.kitchen_temperature
+      - sensor.living_room_temperature
+      - sensor.mayas_bedroom_temperature
+      - sensor.office_temperature
+    name: "Upstairs"
+    view: true
+  smoke_view:
+    entities:
+      - group.smokedetectors
+    name: "Smoke / CO"
+    view: true
+####GROUPS
+  livingroom:
+    entities:
+      - light.living_room
+      - media_player.living_room
+      - media_player.roku_1gh33k009150
+      - binary_sensor.living_room_occupancy
+    name: "Living Room"
+  kitchen:
+    entities:
+      - light.kitchen_sink_lig_level_4_0
+      - light.kitchen_lights_level_5_0
+      - light.dining_room_ligh_level_6_0
+      - light.pendant_lights_level_3_0
+      - binary_sensor.kitchen_occupancy
+      - media_player.kitchen
+      - scene.first_floor_nightlight
+    name: "Kitchen"
+  basement:
+    entities:
+      - light.basement_accent
+      - light.basement_stairs
+      - binary_sensor.downstairs_occupancy
+      - light.front_basement_l_level_9_0
+      - light.rear_basement_li_level_8_0
+      - switch.wemo_switch
+      - binary_sensor.wemo_motion
+      - scene.netflix_and_chill
+      - media_player.basement
+      - media_player.basement_vizio
+    name: "Basement"
+  upstairs:
+    entities:
+      - light.master_bedroom
+      - light.mayas_bedroom
+      - binary_sensor.upstairs_nest_protect_online
+      - binary_sensor.mayas_bedroom_occupancy
+      - light.office
+    name: "Upstairs"
+  lights:
+    entities:
+      - light.kitchen_lights_level_5_0
+      - light.dining_room_light_level_6_0
+      - light.kitchen_sink_light_level_4_0
+      - light.pendant_lights_level_3_0
+      - light.front_basement_lights_level_9_0
+      - light.rear_basement_lights_level_8_0
+      - light.basement_accent
+      - light.basement_stairs
+      - light.living_room
+      - light.master_bedroom
+      - light.mayas_bedroom
+      - light.office_ceiling
+      - light.office_floor
+      - light.side_door_light_level_11_0
+      - light.backyard_lights_level_13_0
+      - light.aeotec_zw098_led_bulb_level_2_0
+      - switch.kitchen_hallway_switch_7_0
+  weather:
+    entities:
+      - sensor.dark_sky_icon
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_daily_high_temperature
+      - sensor.dark_sky_daily_low_temperature
+      - sensor.dark_sky_daily_summary
+      - sun.sun
+  smokedetectors:
+    entities:
+      - binary_sensor.kitchen_nest_protect_online
+      - sensor.kitchen_nest_protect_battery_health
+      - sensor.kitchen_nest_protect_co_status
+      - sensor.kitchen_nest_protect_smoke_status
+      - binary_sensor.upstairs_nest_protect_online
+      - sensor.upstairs_nest_protect_battery_health
+      - sensor.upstairs_nest_protect_co_status
+      - sensor.upstairs_nest_protect_smoke_status
+  scenes:
+    entities:
+      - scene.first_floor_nightlight
+      - scene.goodmorning
+      - scene.goodnight
+      - scene.netflix_and_chill
+      - scene.outdoor
+  rules:
+    entities:
+      - automation.basement_lights_auto_off
+      - automation.good_morning
+      - automation.lights_off_at_sunrise
+      - automation.office_lights_auto_off
+      - automation.turn_on_lights_when_sun_sets
+  media:
+    entities:
+      - media_player.basement
+      - media_player.bedroom
+      - media_player.kitchen
+      - media_player.living_room
+      - media_player.roku_1gh33k009150
+
+light:
+  platform: hue
+  host: <insert IP here>
+  allow_unreachable: true
+
+media_player:
+  - platform: sonos
+  - platform: plex
+  - platform: cast
+
+mqtt:
+  broker: <insert IP here>
+  port: 1883
+  client_id: home-assistant-1
+  username: 
+  password: 
+
+zwave:
+  usb_path: /dev/ttyAMA0
+  polling_interval: 60000
+  autoheal: true
+  customize:
+    light.pendant_lights_level_3_0:
+      refresh_value: true
+      delay: 3
+      polling_intensity: 1
+    light.kitchen_sink_light_level_4_0:
+      refresh_value: true
+      delay: 3
+      polling_intensity: 1
+    light.kitchen_lights_level_5_0:
+      refresh_value: true
+      delay: 3
+      polling_intensity: 1
+    light.dining_room_light_level_6_0:
+      refresh_value: true
+      delay: 3
+      polling_intensity: 1
+    light.rear_basement_lights_level_8_0:
+      refresh_value: true
+      delay: 3
+      polling_intensity: 1
+    light.front_basement_lights_level_9_0:
+      refresh_value: true
+      delay: 3
+      polling_intensity: 1
+
+ecobee:
+  api_key: <insert API key here>
+
+climate:
+  platform: ecobee
+
+nest:
+  client_id: <from Nest>
+  client_secret: <from Nest>
+
+emulated_hue:
+  type: alexa
+  host_ip: <private IP>
+  listen_port: 8300
+  off_maps_to_on_domains:
+    - script
+    - scene
+  expose_by_default: true
+  exposed_domains:
+    - light
+    - scene
+    - script
+
+notify:
+  - name: mannapushbullet
+    platform: pushbullet
+    api_key: <private API key>
