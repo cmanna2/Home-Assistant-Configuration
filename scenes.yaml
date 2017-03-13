@@ -1,0 +1,80 @@
+  - name: Away After Sunset
+    entities:
+        switch.kitchen_hallway_switch_7_0:
+            state: on
+        light.dining_room_light_level_6_0:
+            state: on
+            brightness: 50
+        light.kitchen_sink_light_level_4_0:
+            state: on
+            brightness: 50
+
+  - name: Away Before Sunset
+    entities:
+        group.indoor_lights:
+            state: off
+
+  - name: Netflix and Chill
+    entities:
+        light.rear_basement_lights_level_8_0: off
+        light.front_basement_lights_level_9_0: off
+        switch.kitchen_hallway_switch_7_0:
+            state: on
+        light.basement_accent:
+            state: on
+            brightness: 70
+        light.basement_stairs:
+            state: on
+            brightness: 50
+            
+  - name: First Floor Nightlight
+    entities:
+        light.kitchen_sink_light_level_4_0:
+            state: on
+            brightness: 30
+        light.kitchen_accent:
+            state: on
+            brightness: 75
+        light.kitchen_lights_level_5_0: off
+        light.pendant_lights_level_3_0: off
+        light.dining_room_light_level_6_0: off
+
+  - name: Goodmorning
+    entities:
+        light.kitchen_lights_level_5_0:
+            state: on
+            brightness: 30
+        light.living_room:
+            state: on
+            brightness: 50
+        light.dining_room_light_level_6_0:
+            state: on
+            brightness: 30
+
+  - name: Goodnight
+    entities:
+        light.pendant_lights_level_3_0: off
+        light.kitchen_sink_light_level_4_0: off
+        light.kitchen_lights_level_5_0: off
+        light.dining_room_light_level_6_0: off
+        light.rear_basement_lights_level_8_0: off
+        light.front_basement_lights_level_9_0: off
+        light.kitchen_accent: off
+        light.basement_stairs: off
+        light.basement_accent: off
+        light.living_room: off
+        light.master_bedroom: off
+        switch.kitchen_hallway_switch_7_0: off
+        switch.maya_basement_outlet_switch_14_0: off
+
+  - name: Outdoor
+    entities:
+        light.side_door_light_level_11_0:
+            state: on
+            brightness: 99
+        light.backyard_lights_level_13_0:
+            state: on
+            brightness: 20
+        light.aeotec_zw098_led_bulb_level_2_0:
+            state: on
+            brightness: 99
