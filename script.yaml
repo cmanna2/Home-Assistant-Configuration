@@ -1,0 +1,17 @@
+  input_select_harmony:
+    alias: "Start activity from input select"
+    sequence:
+      - service: remote.turn_on
+        data_template:
+          entity_id: remote.basement_harmony
+          activity: >
+            {% if is_state("input_select.basement_tv", "PowerOff") %}
+                -1
+            {% elif is_state("input_select.basement_tv", "Watch TV on Xbox") %}
+                24836255
+            {% elif is_state("input_select.basement_tv", "Cast to TV") %}
+                24836232
+            {% elif is_state("input_select.basement_tv", "Listen to Basement Sonos") %}
+                24745109                
+            {% endif %}
+
