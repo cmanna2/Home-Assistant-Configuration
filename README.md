@@ -2,7 +2,8 @@
 Home Assistant Configuration on RPi3
 
 ## Hubs
-* Raspberry Pi running Home Assistant, Mosquitto (MQTT), Openzwave Control Panel, Razberry GPIO zwave daughter card
+* Raspberry Pi 3 running Home Assistant, Mosquitto (MQTT), Openzwave Control Panel, Razberry GPIO zwave daughter card
+* Raspberry Pi Model B running Homebridge with HomeAssistant plugin
 * Philips Hue Hub
 * Logitech Harmony Hub
 
