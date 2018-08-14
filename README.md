@@ -33,6 +33,7 @@ Home Assistant Configuration on Intel Nuc
 
 ## Lighting
 * Hue color changing bulbs
+* Hue lightstrip
 * GE zwave light switches
 * Aeotec Zwave LED Light
 
