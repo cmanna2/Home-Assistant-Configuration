@@ -4,7 +4,7 @@ Home Assistant Configuration on Intel Nuc
 ## Hubs (Hardware/Software)
 * Intel Nuc (i3) with Aeotec Zwave Stick running Ubuntu 16.04 w/ Docker
   * Portainer
-  * HassIO
+  * Home Assistant (HassIO)
   * Unifi Controller
   * Node-red
   * Grafana
@@ -86,8 +86,3 @@ Home Assistant Configuration on Intel Nuc
 
 ### Zwave
 * Heal the zwave network at 2:30am
-
-### User Interface
-* Display the outdoor lighting tile after sunset
-* Display the chromecast media tile when playing
-* Display Roku media tile when playing
