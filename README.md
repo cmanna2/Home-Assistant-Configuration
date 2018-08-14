@@ -1,24 +1,68 @@
 # Home-Assistant-Configuration
-Home Assistant Configuration on RPi3
+Home Assistant Configuration on Intel Nuc
 
-## Hubs
-* Raspberry Pi 3 running Home Assistant, Mosquitto (MQTT), Openzwave Control Panel, Razberry GPIO zwave daughter card
-* Raspberry Pi Model B running Homebridge with HomeAssistant plugin
+## Hubs (Hardware/Software)
+* Intel Nuc (i3) with Aeotec Zwave Stick running Ubuntu 16.04 w/ Docker
+  * Portainer
+  * HassIO
+  * Unifi Controller
+  * Node-red
+  * Grafana
+  * InfluxDB
+  * Tautulli
 * Philips Hue Hub
 * Logitech Harmony Hub
 
-## Devices
+## Networking
+* 2x Ubiquiti Networks Unifi 802.11AC Pro
+* Unified Security Gateway
+* TPLink PoE Switch
+* RPi 2 running PiHole
+
+## Security
+* Amcrest IP2M-841EW PoE Camera
+* Amcrest IP2M-844E
+* Raspberry Pi Zero W w/ Camera Module
+* NVR - tinyCam recording to Dropbox
+
+## HVAC
+* Ecobee 3 w/ remote sensors
+
+## Voice Control / Assistant
+* 4x Alexa Echo Dot
+
+## Lighting
+* Hue color changing bulbs
 * GE zwave light switches
+* Aeotec Zwave LED Light
+
+## Sensors
+* Hue motion sensor
+* Zooz zwave multisensor
+
+## Switches
 * GE zwave outlets
 * Belkin Wemo switch + motion sensor
-* Hue color bulbs
-* Hue motion sensor
+* TPLink Switch
 
 ## Media
 * Plex Media Server
 * Chromecast
 * Roku 3
-* Sonos Play 5, Play 1, Connect
+* Xbox 360
+
+## Audio
+* Sonos Play 5
+* Sonos Play 1
+* Sonos Connect
+
+## Garage
+* GoControl Zwave Garage Relay
+
+## Smoke/CO Detection
+* 2x First Alert 2-in-1 Z-Wave Smoke Detector & Carbon Monoxide Alarm
+* 2x Nest Protect
+
 
 ## Automations
 
