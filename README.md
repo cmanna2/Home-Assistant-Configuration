@@ -1,4 +1,4 @@
-# Home-Assistant-Configuration
+# Home Assistant Config (0.73)
 Home Assistant Configuration on Intel Nuc
 
 ## Hubs (Hardware/Software)
@@ -34,7 +34,7 @@ Home Assistant Configuration on Intel Nuc
 ## Lighting
 * Hue color changing bulbs
 * Hue lightstrip
-* GE zwave light switches
+* GE zwave light switches (motion sensing, paddle)
 * Aeotec Zwave LED Light
 
 ## Sensors
@@ -43,6 +43,7 @@ Home Assistant Configuration on Intel Nuc
 
 ## Switches
 * GE zwave outlets
+* GE zwave outdoor switch
 * Belkin Wemo switch + motion sensor
 * TPLink Switch
 
@@ -56,6 +57,13 @@ Home Assistant Configuration on Intel Nuc
 * Sonos Play 5
 * Sonos Play 1
 * Sonos Connect
+
+## Notification
+* Pushbullet
+
+## Presence Detection
+* Unifi Controller
+* Nmap
 
 ## Garage
 * GoControl Zwave Garage Relay
@@ -75,7 +83,7 @@ Home Assistant Configuration on Intel Nuc
 * Turn off basement lights after the ecobee remote sensor goes unoccupied and the harmony hub is off and at least one basement light is on
 * Turn off office lights after ecobee remote sensor goes unoccupied
 * Turn on outdoor lights and select indoor lights when sun sets
-* Turn on Maya’s play light in basement when ecobee remote sensor goes occupied
+* Turn on play light in basement when ecobee remote sensor goes occupied
 * Turn off outside lights and upstairs lights when the sun rises
 * Turn off all lights when we go to bed
 
