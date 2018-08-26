@@ -1,0 +1,39 @@
+  trigger_first_morning:
+    name: Waiting for first morning motion
+    icon: mdi:kettle
+  trigger_away_mode:
+    name: Away Mode
+    icon: mdi:telegram
+  trigger_goodnight:
+    name: Goodnight
+  guest_mode:
+    name: Guest Mode
+    initial: off
+  home_mode:
+    name: Home Mode
+    initial: on
+  vacation_mode:
+    name: Vacation Mode
+    initial: off
+  trigger_alarm_mode:
+    name: Alarm Mode
+    initial: off
+    icon: mdi:security-home
+  turn_off_computer:
+    name: Computer
+    initial: off
+  turn_on_living_room_roku:
+    name: Living Room Roku
+    initial: off
+  turn_off_living_room_tv:
+    name: Living Room TV
+    initial: on
+  trigger_girls_in_bed:
+    name: Girls in bed
+    initial: off
+  trigger_girls_bedtime_routine:
+    name: Bedtime Routine
+    initial: off
+  turn_on_living_room_chromecast:
+    name: Living Room Chromecast
+    initial: off
