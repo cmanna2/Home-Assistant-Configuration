@@ -1,0 +1,17 @@
+  basement_tv:
+    name: Basement Harmony Control
+    options:
+      - PowerOff
+      - Watch TV on Xbox
+      - Cast to TV
+      - Listen to Basement Sonos
+    initial: PowerOff
+    icon: mdi:monitor
+  living_room_tv:
+    name: Living Room Harmony Control
+    options:
+      - PowerOff
+      - Watch Roku
+      - Watch Chromecast
+    initial: PowerOff
+    icon: mdi:monitor
