@@ -1,0 +1,15 @@
+  - platform: wake_on_lan
+    mac_address: "00-26-18-A2-80-74"
+    name: "Plex Server"
+    host: "10.0.0.36"
+    broadcast_address: 255.255.255.255
+  - platform: command_line
+    switches:
+      htpc_shutdown:
+        command_off: shell_command.htpc
+  - platform: tplink
+    host: 10.0.0.5
+    name: Mayas Humidifier
+  - platform: tplink
+    host: 10.0.0.4
+    name: Morgans Humidifier
