@@ -1,0 +1,223 @@
+    group.home_status:
+      order: 1
+    group.scenes:
+      order: 2
+    group.indoor_lights:
+      order: 3
+    group.weather:
+      order: 5
+    group.home_triggers:
+      order: 4
+
+    device_tracker.amandaiphone:
+      icon: mdi:home
+    device_tracker.chrisiphone:
+      icon: mdi:home
+
+    media_player.living_room:
+      friendly_name: Living Room Roku
+    media_player.kitchen:
+      friendly_name: Kitchen Sonos
+      icon: mdi:speaker-wireless
+    media_player.basement:
+      friendly_name: Basement Sonos
+      icon: mdi:speaker-wireless
+    media_player.basement_vizio:
+      friendly_name: Vizio Cast
+      icon: mdi:cast
+
+    light.living_room:
+      friendly_name: Living Room Light
+    light.kitchen_can_lights_level:
+      friendly_name: Kitchen Lights
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.kitchen_sink_light_level:
+      friendly_name: Kitchen Sink Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.dining_room_light_level:
+      friendly_name: Dining Room Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.front_basement_light_level:
+      friendly_name: Front Basement Lights
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.rear_basement_lights_level:
+      friendly_name: Back Basement Lights
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.side_door_light_level:
+      friendly_name: Side Door Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.backyard_lights_level:
+      friendly_name: Backyard Lights
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.aeotec_zw098_led_bulb_level:
+      friendly_name: Furnace Room Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.pendant_lights_level:
+      friendly_name: Pendant Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+      icon: mdi:ceiling-light
+    light.basement_accent:
+      friendly_name: Basement Accent Light
+    light.basement_stairs:
+      friendly_name: Basement Stair Light
+    light.kitchen_accent:
+      friendly_name: Kitchen Accent Light
+    light.master_bedroom:
+      friendly_name: Master Bedroom Light
+    light.mayas_bedroom:
+      friendly_name: Mayas Bedroom Light
+    light.office:
+      friendly_name: Office Light
+    light.back_door_light_level:
+      friendly_name: Back Door Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.upstairs_hallway_light_level:
+      friendly_name: Upstairs Hallway Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    light.stairway_light_level:
+      friendly_name: Stairway Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+
+    switch.wemo_switch:
+      friendly_name: Basement Lamp
+      homebridge_name: Basement Lamp
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    switch.outdoor_switch_switch:
+      friendly_name: Outdoor Switch
+      homebridge_name: Outdoor Switch
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    switch.kitchen_hallway_light_switch:
+      friendly_name: Kitchen Hallway Light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    switch.builtin_switch_switch:
+      friendly_name: Built-in switch
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    switch.maya_basement_outlet_switch:
+      friendly_name: Mayas basement light
+      emulated_hue_hidden: false
+      homebridge_visible: true
+#    switch.christmas_tree:
+#      icon: mdi:pine-tree
+#      homebridge_visible: true
+#    switch.railing_lights:
+#      homebridge_visible: true
+    switch.plex_server:
+      friendly_name: Wake Up Plex / Plex Status
+      homebridge_visible: true
+      icon: mdi:plex
+    switch.mayas_humidifier:
+      friendly_name: Maya's Humidifier
+      homebridge_visible: true
+    switch.morgans_humidifier:
+      friendly_name: Morgan's Humidifier
+      homebridge_visible: true
+      
+    binary_sensor.kitchen_nest_protect_online:
+      friendly_name: Kitchen Protect
+      icon: mdi:smoke-detector
+      homebridge_visible: true
+    binary_sensor.upstairs_nest_protect_online:
+      friendly_name: Upstairs Protect
+      icon: mdi:smoke-detector
+      homebridge_visible: true
+
+    scene.netflix_and_chill:
+      icon: mdi:sofa
+      friendly_name: Movie Scene
+    scene.goodnight:
+      icon: mdi:sleep
+    scene.goodmorning:
+      icon: mdi:white-balance-sunny
+      emulated_hue_hidden: true
+    scene.first_floor_lights:
+      emulated_hue_hidden: false
+    scene.all_basement_lights:
+      emulated_hue_hidden: false
+    scene.first_floor_nightlight:
+      icon: mdi:brightness-2
+      homebridge_name: 1st Flr Nightlight
+      emulated_hue_hidden: false
+      homebridge_visible: true
+    scene.outdoor:
+      icon: mdi:terrain
+      emulated_hue_hidden: true
+    scene.away_after_sunset:
+      emulated_hue_hidden: true
+    scene.away_before_sunset:
+      emulated_hue_hidden: true
+    scene.100_w_tungsten_outdoor_light:
+      emulated_hue_hidden: true
+    scene.blue_outdoor_light:
+      emulated_hue_hidden: true
+    scene.green_outdoor_light:
+      emulated_hue_hidden: true
+    scene.red_outdoor_light:
+      emulated_hue_hidden: true
+    scene.white_outdoor_light:
+      emulated_hue_hidden: true
+ 
+    script.goodmorning:
+      emulated_hue_hidden: true
+    script.goodnight_chris_away:
+      emulated_hue_hidden: true
+
+    sensor.current_activity:
+      icon: mdi:cast-connected
+    sensor.target_high_temp:
+      icon: mdi:snowflake
+    sensor.target_low_temp:
+      icon: mdi:thermometer-lines
+    sensor.ecobee_operation:
+      icon: mdi:fan
+
+    input_boolean.trigger_goodnight:
+      icon: mdi:sleep
+      homebridge_visible: true
+    input_boolean.trigger_away_mode:
+      homebridge_visible: true
+    input_boolean.guest_mode:
+      icon: mdi:human-male-female
+    input_boolean.home_mode:
+      icon: mdi:home
+    input_boolean.vacation_mode:
+      icon: mdi:airplane
+    input_boolean.turn_off_computer:
+      friendly_name: Shut down Computer
+      homebridge_visible: true
+      icon: mdi:server
+    input_boolean.turn_on_living_room_roku:
+      friendly_name: Living Room Roku
+      homebridge_visible: true
+    input_boolean.turn_off_living_room_tv:
+      friendly_name: Living Room TV
+      homebridge_visible: true
+    input_boolean.turn_on_living_room_chromecast:
+      friendly_name: Living Room Chromecast
+      homebridge_visible: true
+    input_boolean.trigger_girls_in_bed:
+      friendly_name: Girls in bed
+      homebridge_visible: true
+      emulated_hue_hidden: false
+      icon: mdi:hotel
+    input_boolean.trigger_girls_bedtime_routine:
+      friendly_name: Girls bedtime routine
+      homebridge_visible: true
+      emulated_hue_hidden: false
+      icon: mdi:shower
+
