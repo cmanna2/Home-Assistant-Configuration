@@ -1,0 +1,285 @@
+####VIEWS####
+  default_view:
+    entities:
+      - group.indoor_lights
+      - group.home_triggers
+      - group.home_status
+      - group.livingroom_cast
+      - group.media
+      - group.basement_cast
+      - sensor.mannabee_temperature
+      - sensor.vision_zp3111_multisensor_4in1_temperature
+      - sensor.living_room_temperature
+      - sensor.mayas_bedroom_temperature
+      - sensor.morgans_bedroom_temperature
+      - sensor.downstairs_temperature
+      - sensor.office_temperature
+      - sensor.amcrest_camera_sd_used
+    view: true
+    icon: mdi:home-assistant
+  groundfloor_view:
+    entities:
+      - group.livingroom
+      - group.kitchen
+      - group.outdoor_lights
+    icon: mdi:home-circle
+    view: true
+  basement_view:
+    entities:
+      - group.basement
+      - input_select.basement_tv
+    icon: mdi:arrow-down-bold-circle
+    view: true
+  upstairs_view:
+    entities:
+      - group.upstairs
+#      - camera.amcrest_camera
+    icon: mdi:arrow-up-bold-circle
+    view: true
+  scene_view:
+    entities:
+      - group.indoor_scenes
+      - group.outdoor_scenes
+    icon: mdi:play-circle
+    view: true
+  smoke_view:
+    entities:
+      - group.smokedetectors
+    icon: mdi:smoke-detector
+    view: true
+  rules_view:
+    entities:
+      - group.home_modes
+      - group.rules
+      - group.system_monitor
+    icon: mdi:settings
+    view: true
+
+####GROUPS####
+
+  livingroom:
+    entities:
+      - light.living_room
+      - light.level
+      - media_player.living_room
+      - binary_sensor.living_room_occupancy
+    name: "Living Room"
+
+  kitchen:
+    entities:
+      - light.kitchen_sink_light_level
+      - light.kitchen_accent
+      - light.kitchen_can_lights_level
+      - light.dining_room_light_level
+      - light.pendant_lights_level
+      - binary_sensor.kitchen_occupancy
+      - media_player.kitchen
+      - scene.first_floor_nightlight
+    name: "Kitchen"
+
+  basement:
+    entities:
+      - light.basement_accent
+      - light.basement_stairs
+      - binary_sensor.downstairs_occupancy
+      - light.front_basement_light_level
+      - light.rear_basement_lights_level
+      - switch.wemo_switch
+      - switch.maya_basement_outlet_switch
+      - scene.netflix_and_chill
+      - media_player.basement
+    name: "Basement"
+
+  home_triggers:
+    entities:
+      - input_boolean.home_mode
+      - input_boolean.trigger_alarm_mode
+      - input_boolean.trigger_goodnight
+      - input_boolean.trigger_girls_in_bed
+      - input_boolean.trigger_girls_bedtime_routine
+#     - switch.christmas_tree
+      - switch.morgans_humidifier
+      - switch.mayas_humidifier
+      - input_boolean.turn_off_computer
+      - switch.plex_server
+      - input_select.basement_tv
+      - input_select.living_room_tv
+    name: "Triggers"    
+  
+  upstairs:
+    entities:
+      - light.master_bedroom
+      - light.mayas_bedroom
+      - light.morgans_bedroom
+      - light.upstairs_hallway_light_level
+      - switch.morgans_humidifier
+      - switch.mayas_humidifier
+      - binary_sensor.upstairs_nest_protect_online
+      - binary_sensor.mayas_bedroom_occupancy
+    name: "Upstairs"
+
+  indoor_lights:
+    entities:
+      - light.kitchen_can_lights_level
+      - light.kitchen_accent
+      - light.dining_room_light_level
+      - light.kitchen_sink_light_level
+      - light.pendant_lights_level
+      - light.front_basement_light_level
+      - light.rear_basement_lights_level
+      - light.basement_accent
+      - light.basement_stairs
+      - light.living_room
+      - light.master_bedroom
+      - light.mayas_bedroom
+      - light.morgans_bedroom
+      - light.office
+      - switch.wemo_switch
+      - switch.maya_basement_outlet_switch
+      - switch.kitchen_hallway_light_switch
+      - switch.railing_lights
+      - light.aeotec_zw098_led_bulb_level
+      - light.upstairs_hallway_light_level
+      - light.stairwell_light_level
+    name: "Indoor Lights"
+
+  outdoor_lights:
+    entities:
+      - light.side_door_light_level
+      - light.backyard_lights_level
+      - light.back_door_light_level
+      - switch.outdoor_switch_switch
+    name: "Outdoor Lights"
+
+  weather:
+    entities:
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_daily_high_temperature
+      - sensor.dark_sky_daily_low_temperature
+      - sun.sun
+    name: "Weather"
+
+  smokedetectors:
+    entities:
+      - sensor.basement_battery_level_smoke_co_alarm
+      - sensor.basement_status_smoke_co_alarm
+      - binary_sensor.kitchen_nest_protect_online
+      - sensor.kitchen_nest_protect_battery_health
+      - sensor.kitchen_nest_protect_co_status
+      - sensor.kitchen_nest_protect_smoke_status
+      - binary_sensor.upstairs_nest_protect_online
+      - sensor.upstairs_nest_protect_battery_health
+      - sensor.upstairs_nest_protect_co_status
+      - sensor.upstairs_nest_protect_smoke_status
+    name: "Smoke Detectors"
+
+  indoor_scenes:
+    entities:
+      - scene.first_floor_nightlight
+      - scene.goodmorning
+      - scene.goodnight
+      - scene.netflix_and_chill
+    name: "Indoor Scenes"
+    
+  outdoor_scenes:
+    entities:
+      - scene.outdoor
+      - scene.red_outdoor_light
+      - scene.blue_outdoor_light
+      - scene.white_outdoor_light
+      - scene.green_outdoor_light
+      - scene.100_w_tungsten_outdoor_light
+    name: "Outdoor Scenes"
+
+  rules:
+    entities:
+      - automation.basement_lights_auto_off            
+      - automation.good_morning
+      - automation.goodnight
+      - automation.lights_off_at_sunrise
+      - automation.office_lights_auto_off
+      - automation.turn_on_lights_when_sun_sets
+      - automation.enable_first_morning_trigger
+      - automation.mayas_basement_light_auto_on
+      - automation.office_lights_auto_off
+      - automation.goodnight_winter_temp_setback
+      - automation.goodnight_vacation
+      - automation.away_after_sunset
+      - automation.away_before_sunset
+      - automation.check_away_mode_at__sunset
+      - automation.ecobee_triggered_away_after_sunset
+      - automation.ecobee_triggered_away_before_sunset
+      - automation.iphone_triggered_away_after_sunset
+      - automation.iphone_triggered_away_before_sunset
+      - automation.iphone_triggered_home
+      - automation.sonos_music_test
+    name: "Rules"
+
+  media:
+    entities:
+      - media_player.basement
+      - media_player.bedroom
+      - media_player.kitchen
+
+  home_modes:
+    entities:
+      - input_boolean.trigger_alarm_mode
+      - input_boolean.trigger_away_mode
+      - input_boolean.home_mode
+      - input_boolean.guest_mode
+      - input_boolean.vacation_mode
+    name: "Home Modes"
+
+  system_monitor:
+    entities:
+      - sensor.amcrest_camera_sd_used
+      - sensor.cpu_use
+      - sensor.disk_free_
+      - sensor.last_boot
+      - sensor.ram_free
+    name: "System Monitor"
+
+  livingroom_cast:
+    entities:
+      - media_player.living_room
+
+  basement_cast:
+    entities:
+      - media_player.basement_tv
+
+  devices:
+    entities:
+      - device_tracker.chrisiphone
+      - device_tracker.amandaiphone
+  
+  home_status:
+    entities:
+      - device_tracker.amandaiphone
+      - device_tracker.chrisiphone
+      - sensor.basement_harmony_current_activity
+      - sensor.living_room_harmony_current_activity
+      - sensor.target_low_temp
+      - sensor.target_high_temp
+      - sensor.ecobee_operation
+    name: "Home Status"
+    
+  all_basement_lights:
+    entities:
+      - light.basement_accent
+      - light.basement_stairs
+      - light.front_basement_light_level
+      - light.rear_basement_lights_level
+      - switch.wemo_switch
+      - switch.maya_basement_outlet_switch
+
+  first_floor_lights:
+    entities:
+      - light.kitchen_can_lights_level
+      - light.kitchen_accent
+      - light.dining_room_light_level
+      - light.kitchen_sink_light_level
+      - light.pendant_lights_level
+      - light.living_room
+      - light.stairwell_light_level
