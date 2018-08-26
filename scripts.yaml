@@ -1,0 +1,165 @@
+  basement_harmony:
+    alias: "Start activity from input select"
+    sequence:
+      - service: remote.turn_on
+        data_template:
+          entity_id: remote.basement_harmony
+          activity: >
+            {% if is_state("input_select.basement_tv", "PowerOff") %}
+                -1
+            {% elif is_state("input_select.basement_tv", "Watch TV on Xbox") %}
+                24836255
+            {% elif is_state("input_select.basement_tv", "Cast to TV") %}
+                24836232
+            {% elif is_state("input_select.basement_tv", "Listen to Basement Sonos") %}
+                24745109                
+            {% endif %}
+
+  living_room_harmony:
+    alias: "Start activity from input select"
+    sequence:
+        service: remote.turn_on
+        data_template:
+          entity_id: remote.living_room_harmony
+          activity: >
+            {% if is_state("input_select.living_room_tv", "PowerOff") %}
+                -1
+            {% elif is_state("input_select.living_room_tv", "Watch Chromecast") %}
+                29269803
+            {% elif is_state("input_select.living_room_tv", "Watch Roku") %}
+                29269745
+            {% elif is_state("input_select.living_room_tv", "Watch TV") %}
+                29297051                
+            {% endif %}
+
+  say:
+    alias: Sonos TTS
+    sequence:
+      - service: media_player.sonos_snapshot
+        data_template:
+          with_group: yes
+      - service: media_player.sonos_unjoin
+        data_template:
+          entity_id: "{{ where }}"
+      - delay: '00:00:01'
+      - service: media_player.sonos_join
+        data_template:
+          master: "{{ master }}"
+          entity_id: "{{ where }}"
+      - delay: '00:00:01'
+      - service: media_player.volume_set
+        data_template:
+          entity_id: "{{ where }}"
+          volume_level: "{{ volume }}"
+      - service: tts.google_say
+        data_template:
+          entity_id: "{{ master }}"
+          message: "{{ what }}"
+      - delay: '00:00:25'
+      - service: media_player.sonos_restore
+        data_template:
+          with_group: yes
+
+  goodnight:
+    alias: "Bedtime script when everyone is home"
+    sequence:
+      - service: scene.turn_on
+        entity_id: scene.goodnight
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.mannabee
+          hold_mode: sleep
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.trigger_alarm_mode
+#      - service: climate.set_temperature
+#        data:
+#          entity_id: climate.mannabee
+#          target_temp_high: 78
+#          target_temp_low: 64
+
+  girls_in_bed:
+    alias: "Girls In Bed Script"
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.mannabee
+          hold_mode: Girls In Bed
+
+  girls_bedtime_routine:
+    alias: "Girls In Bed Script"
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: light.morgans_bedroom
+          brightness: 153
+          rgb_color: 236,191,111
+      - service: light.turn_on
+        data:
+          entity_id: light.mayas_bedroom
+          brightness: 153
+          rgb_color: 236,191,111
+
+  goodnight_chris_away:
+    alias: "Bedtime script when Chris is not home"
+    sequence:
+      - service: scene.turn_on
+        entity_id: scene.goodnight_chris_away
+
+  goodmorning:
+    alias: "Wake up script"
+    sequence:
+      - service: scene.turn_on
+        entity_id: scene.goodmorning
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.trigger_away_mode
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.trigger_first_morning
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.trigger_alarm_mode
+      - service: notify.notify_manna
+        data:
+          title: 'Good morning'
+          message: 'My girls are up'
+
+  away_mode_before_sunset:
+    alias: "Away mode before sunset script"
+    sequence:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.mannabee
+          away_mode: true
+      - service: notify.notify_manna
+        data:
+          title: 'Brb'
+          message: 'Script Ran'
+      - service: remote.turn_off
+        entity_id: remote.living_room_harmony
+      - service: scene.turn_on
+        entity_id: scene.away_before_sunset
+
+  away_mode_after_sunset:
+    alias: "Away mode after sunset script"
+    sequence:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.mannabee
+          away_mode: true
+      - service: notify.notify_manna
+        data:
+          title: 'Brb'
+          message: 'Script Ran'
+      - service: remote.turn_off
+        entity_id: remote.living_room_harmony
+      - service: scene.turn_on
+        entity_id: scene.away_after_sunset
+
+  test_actionable_notify:
+    alias: 'Test Actionable Notification'
+    sequence:
+      - service: notify.notify_manna
+        data:
+          message: "No Motion But Lights On In Basement"
+          data:
+            push:
+              badge: 0
+              category: "lightsoff" # Needs to match the top level identifier you used in the ios configuration
