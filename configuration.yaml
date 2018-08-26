@@ -1,134 +1,66 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
-  name: Home
-  # Location required to calculate the time the sun rises and sets
-  latitude: <secret>
-  longitude: <secret>
+  name: REDACTED Abode
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: <secret>
+  elevation: !secret home_elevation
   # metric for Metric, imperial for Imperial
   unit_system: imperial
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Chicago
-  customize:
-    media_player.living_room:
-      friendly_name: Living Room Chromecast
-    configurator.plex_media_server:
-      hidden: true
-    media_player.plex_web_chrome:
-      hidden: true
-    media_player.roku_1gh33k009150:
-      friendly_name: Living Room Roku
-    switch.kitchen_hallway_switch_7_0:
-      friendly_name: Kitchen Hallway Light
-    light.living_room:
-      friendly_name: Living Room Light
-    light.kitchen_lights_level_5_0:
-      friendly_name: Kitchen Lights
-    light.kitchen_sink_light_level_4_0:
-      friendly_name: Kitchen Sink Light
-    light.dining_room_light_level_6_0:
-      friendly_name: Dining Room Light
-    light.front_basement_lights_level_9_0:
-      friendly_name: Front Basement Lights
-    light.rear_basement_lights_level_8_0:
-      friendly_name: Back Basement Lights
-    light.side_door_light_level_11_0:
-      friendly_name: Side Door Light
-    light.backyard_lights_level_13_0:
-      friendly_name: Backyard Lights
-    light.aeotec_zw098_led_bulb_level_2_0:
-      friendly_name: Porch Light
-    light.pendant_lights_level_3_0:
-      friendly_name: Pendant Light
-    switch.wemo_switch:
-      friendly_name: Mayas Basement Light
-    media_player.kitchen:
-      friendly_name: Kitchen Sonos
-      icon: mdi:speaker-wireless
-    media_player.basement:
-      friendly_name: Basement Sonos
-      icon: mdi:speaker-wireless
-    media_player.basement_vizio:
-      friendly_name: Vizio Cast
-      icon: mdi:cast
-    binary_sensor.kitchen_nest_protect_online:
-      friendly_name: Kitchen Protect
-      icon: mdi:nest-protect
-    binary_sensor.upstairs_nest_protect_online:
-      friendly_name: Kitchen Protect
-      icon: mdi:nest-protect
-    scene.netflix_and_chill:
-      icon: mdi:sofa
-      friendly_name: Movie Scene
-    scene.goodnight:
-      icon: mdi:sleep
-    scene.goodmorning:
-      icon: mdi:white-balance-sunny
-    scene.first_floor_nightlight:
-      icon: mdi:brightness-2
-    scene.outdoor:
-      icon: mdi:terrain
-    sensor.current_activity:
-      icon: mdi:cast-connected
+  customize: !include customize.yaml
 
-# Enables the frontend
+zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 100
+    icon: mdi:account-multiple
+  
 frontend:
+  javascript_version: latest
+  themes: !include themes.yaml
 
+config:
+  
+sensor: !include sensors.yaml
+
+input_boolean: !include input_boolean.yaml
+
+input_select: !include input_select.yaml
+
+switch: !include switch.yaml
+
+script: !include scripts.yaml
+
+automation: !include automations.yaml
+
+scene: !include scenes.yaml
+
+group: !include groups.yaml
+  
 http:
-  # Uncomment this to add a password (recommended!)
-  # api_password: PASSWORD
-  # Uncomment this if you are using SSL or running in Docker etc
-  # base_url: example.duckdns.org:8123
-
+  api_password: !secret api_password
+  trusted_networks:
+    - REDACTED.6
+    - REDACTED.7
 # Checks for available updates
 updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - philips_hue
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
 # Enables support for tracking state changes over time.
-history:
-  include:
-    entities:
-      - sensor.living_room_temperature
-      - sensor.mannabee_temperature
-      - sensor.mayas_bedroom_temperature
-      - sensor.office_temperature
-      - sensor.kitchen_temperature
-      - sensor.downstairs_temperature
-      - sensor.mannabee_humidity
-      - light.aeotec_zw098_led_bulb_level_2_0
-      - light.pendant_lights_level_3_0
-      - light.kitchen_sink_light_level_4_0
-      - light.kitchen_lights_level_5_0
-      - light.dining_room_light_level_6_0
-      - light.rear_basement_lights_level_8_0
-      - light.front_basement_lights_level_9_0
-      - light.side_door_light_level_11_0
-      - light.living_room
-      - light.master_bedroom
-      - light.mayas_bedroom
-      - light.backyard_lights_level_13_0
-      - switch.wemo_switch
-      - switch.kitchen_hallway_switch_7_0
-      - automation.basement_lights_auto_off
-      - automation.good_morning
-      - automation.lights_off_at_sunrise
-      - automation.office_lights_auto_off
-      - automation.turn_on_lights_when_sun_sets
-      - binary_sensor.downstairs_occupancy
-      - binary_sensor.kitchen_occupancy
-      - binary_sensor.living_room_occupancy
-      - binary_sensor.mannabee_occupancy
-      - binary_sensor.mayas_bedroom_occupancy
-      - binary_sensor.office_occupancy
+history: !include history.yaml
 
 recorder:
-    purge_days: 10
+  purge_interval: 2
+  purge_keep_days: 14
 
 # View all events in a logbook
 logbook:
@@ -159,134 +91,168 @@ logbook:
       - switch
      
 # Track the sun
+
 sun:
 
-# Weather Prediction
-sensor:
-  - platform: yr
-  - platform: darksky
-    api_key: <secret>
-    monitored_conditions:
-      - summary
-      - icon
-      - precip_probability
-      - temperature
-      - apparent_temperature
-      - dew_point
-      - wind_speed
-      - wind_bearing
-      - cloud_cover
-      - humidity
-      - ozone
-      - hourly_summary
-      - daily_summary
-      - temperature_max
-      - temperature_min
-    update_interval: '01:00'
-  - platform: plex
-    host: <secret>
-    port: <secret>
-    username: <secret>
-    password: <secret>
-  - platform: template
-    sensors:
-      away_mode:
-        friendly_name: 'HVAC Mode'
-        value_template: "{{ states.climate.mannabee.attributes.away_mode }}"
-  - platform: template
-    sensors:
-      current_activity:
-        friendly_name: 'Current Harmony Status'
-        value_template: '{{ states.remote.basement_harmony.attributes.current_activity }}'
-
-# Text to speech
 tts:
   platform: google
 
-input_boolean:
-  trigger_first_morning:
-    name: Waiting for first morning motion
-    icon: mdi:kettle
-  trigger_away_mode:
-    name: Away Mode
-    icon: mdi:telegram
+wemo:
+  static:
+    - REDACTED.28
+    - REDACTED.29
 
-input_select:
-  basement_tv:
-    name: Basement Harmony Control
-    options:
-      - PowerOff
-      - Watch TV on Xbox
-      - Cast to TV
-      - Listen to Basement Sonos
-    initial: PowerOff
-    icon: mdi:monitor
-
-script: !include script.yaml
-
-automation: !include automation.yaml
-
-scene: !include scenes.yaml
-
-group: !include group.yaml
-
-light:
-  platform: hue
-  host: <secret>
-  allow_unreachable: true
+hue:
+  bridges:
+  - host: REDACTED.23
+    allow_unreachable: true
+    allow_hue_groups: false
 
 media_player:
-  - platform: sonos
-  - platform: plex
-  - platform: cast
   - platform: roku
 
-mqtt:
-  broker: <secret>
-  port: 1883
-  client_id: home-assistant-1
-  username: <secret>
-  password: <secret>
+sonos:
+  media_player:
+    hosts:
+      - REDACTED.8
+      - REDACTED.9
+      - REDACTED.10
 
 zwave:
-  usb_path: /dev/ttyAMA0
+  usb_path: /dev/ttyACM0
+  network_key: !secret zwave_network_key
   polling_interval: 90000
   autoheal: false
+  device_config:
+    light.rear_basement_lights_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.front_basement_light_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.pendant_lights_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.kitchen_sink_light_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.kitchen_can_lights_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.dining_room_light_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.stairwell_ight_level:
+      refresh_value: true
+      polling_intensity: 1
+    light.upstairs_hallway_light_level:
+      refresh_value: true
+      polling_intensity: 1 
 
 ecobee:
-  api_key: <secret>
+  api_key: !secret ecobee_api
+  hold_temp: true
 
 climate:
   platform: ecobee
 
 nest:
-  client_id: <secret>
-  client_secret: <secret>
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
 
 emulated_hue:
-  type: alexa
-  host_ip: <secret>
+  host_ip: REDACTED.73
   listen_port: 8300
   off_maps_to_on_domains:
     - script
     - scene
-  expose_by_default: true
-  exposed_domains:
-    - light
-    - scene
-    - script
+  expose_by_default: false
+
+#homekit:
+#  filter:
+#    include_domains:
+#      - light
+#      - media_player
+#  entity_config:
+#    light.kitchen_can_lights_level:
+#      name: Kitchen Lights
+#    light.kitchen_sink_light_level:
+#      name: Kitchen Sink Light
+#    light.dining_room_light_level:
+#      name: Dining Room Light
+#    light.front_basement_light_level:
+#      name: Front Basement Lights
+#    light.rear_basement_lights_level:
+#      name: Back Basement Lights
+#    light.side_door_light_level:
+#      name: Side Door Light
+#    light.backyard_lights_level:
+#      name: Backyard Lights
+#    light.aeotec_zw098_led_bulb_level:
+#      name: Furnace Room Light
+#    light.pendant_lights_level:
+#      name: Pendant Light
+#    light.back_door_light_level:
+#      name: Back Door Light
+#    light.upstairs_hallway_light_level:
+#      name: Upstairs Hallway Light
+#    light.stairway_light_level:
+#      name: Stairway Light
 
 notify:
-  - name: notify_manna
-    platform: pushbullet
-    api_key: <secret>
+  - platform: pushbullet
+    api_key: !secret pushbullet_api
+    name: REDACTED_pushbullet
+  - platform: ios
+  - name: notify_REDACTED
+    platform: group
+    services:
+      - service: ios_REDACTED_iphone
+      - service: ios_REDACTED_iphone
+      - service: REDACTED_pushbullet
 
 remote:
   - platform: harmony
     name: Basement Harmony
-    host: <secret>
+  - platform: harmony
+    name: Living Room Harmony
 
 device_tracker:
-  - platform: nmap_tracker
-    hosts: <secret>
-    home_interval: 10
+  - platform: unifi
+    host: REDACTED.73
+    username: !secret unifi_user
+    password: !secret unifi_pass
+    consider_home: 300
+    interval_seconds: 12
+    verify_ssl: false
+
+
+ios:
+  push:
+    categories:
+      - name: lightsoff
+        identifier: 'lightsoff'
+        actions:
+          - identifier: 'BASEMENT_LIGHTS_OFF'
+            title: 'Turn Off Basement Lights'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: yes
+            behavior: 'default'
+
+camera:
+  - platform: amcrest
+
+amcrest:
+  - host: REDACTED.25
+    username: !secret amcrest1_user
+    password: !secret amcrest1_pass
+    resolution: high
+  - host: REDACTED.26
+    username: !secret amcrest2_user
+    password: !secret amcrest2_pass
+    resolution: high
+
+influxdb:
+  host: REDACTED.73
+  database: home_assistant
