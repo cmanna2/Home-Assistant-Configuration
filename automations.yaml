@@ -1,0 +1,1029 @@
+# MIGRATED TO NODE-RED
+#  - alias: TV Accent Lights
+#    initial_state: 'on'
+#    hide_entity: False
+#    trigger:
+#      - platform: state
+#        entity_id: sensor.basement_harmony_current_activity
+#        to: 'Watch TV on Xbox'
+#      - platform: state
+#        entity_id: sensor.basement_harmony_current_activity
+#        to: 'Cast to TV'
+#    action:
+#      - service: light.turn_on
+#        entity_id: light.basement_accent
+#        data:
+#            brightness: 99
+#      - service: light.turn_on
+#        entity_id: light.basement_stairs
+#        data:
+#            brightness: 99
+#
+# MIGRATED TO NODE-RED
+# - alias: Christmas Lights On
+#   initial_state: 'on'
+#   trigger:
+#     - platform: time
+#       at: '16:00'
+#   action: 
+#     - service: switch.turn_on
+#       entity_id: switch.christmas_tree
+#     - service: switch.turn_on
+#       entity_id: switch.railing_lights
+#   condition:
+#       condition: state
+#       entity_id: switch.christmas_tree
+#       state: 'off'
+#
+# MIGRATED TO NODE-RED  
+# - alias: Christmas Tree Off
+#   initial_state: 'on'
+#   trigger:
+#     - platform: time
+#       at: '23:00'
+#   action: 
+#     - service: switch.turn_off
+#       entity_id: switch.christmas_tree
+#     - service: switch.turn_off
+#       entity_id: switch.railing_lights
+#   condition:
+#       condition: state
+#       entity_id: switch.christmas_tree
+#       state: 'on'
+
+  - alias: Sonos Music Test
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: switch.christmas_tree
+        from: 'on'
+        to: 'off'
+    action: 
+      - service: media_player.volume_set
+        data:
+          volume_level: '.2'
+      - delay: '00:00:02'
+      - service: media_player.select_source
+        data_template:
+          entity_id: media_player.kitchen
+          source: 'Chill'
+
+# MIGRATED TO NODE-RED
+#  - alias: Basement Nightlight
+#    initial_state: 'on'
+#    trigger:
+#      - platform: sun
+#        event: sunset
+#    action: 
+#      service: switch.turn_on
+#      entity_id: switch.wemo_switch
+
+
+  - alias: Enable First Morning Trigger and Disable Goodnight Trigger
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '4:00'
+    action: 
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.trigger_first_morning
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.trigger_goodnight
+
+# MIGRATED TO NODE-RED
+#  - alias: Basement lights auto off
+#    initial_state: 'on'
+#    trigger:
+#        platform: state
+#        entity_id: binary_sensor.downstairs_occupancy
+#        to: 'off'
+#    action:
+#      - service: homeassistant.turn_off
+#        entity_id: switch.maya_basement_outlet_switch, switch.wemo_switch, light.rear_basement_lights_level, light.front_basement_lights_level, light.basement_stairs, light.basement_accent
+#      - service: notify.notify_REDACTED
+#        data:
+#          message: "No Motion But Lights On In Basement"
+#          data:
+#            push:
+#              badge: 0
+#              category: "lightsoff" # Needs to match the top level identifier you used in the ios configuration
+#    condition:
+#      - condition: and
+#        conditions:
+#          - condition: state
+#            entity_id: sensor.basement_harmony_current_activity
+#            state: 'PowerOff'
+#          - condition: or
+#            conditions:
+#              - condition: state
+#                entity_id: light.basement_accent
+#                state: 'on'
+#              - condition: state
+#                entity_id: light.basement_stairs
+#                state: 'on'
+#              - condition: state
+#                entity_id: light.front_basement_lights_level
+#                state: 'on'
+#              - condition: state
+#                entity_id: light.rear_basement_lights_level
+#                state: 'on'
+#              - condition: state
+#                entity_id: switch.maya_basement_outlet_switch
+#                state: 'on'
+#              - condition: state
+#                entity_id: switch.wemo_switch
+#                state: 'on'
+
+# MIGRATED TO NODE-RED                
+#  - alias: Turn on outdoor lights when sun sets
+#    initial_state: 'on'
+#    hide_entity: False
+#    trigger:    
+#        platform: sun
+#        event: sunset
+#    action:
+#        service: scene.turn_on
+#        entity_id: scene.outdoor
+
+# MIGRATED TO NODE-RED
+#  - alias: Turn off outdoor lights at sunrise
+#    initial_state: 'on'
+#    hide_entity: False
+#    trigger:    
+#        platform: sun
+#        event: sunrise
+#    action:
+#      - service: homeassistant.turn_off
+#        entity_id: light.side_door_light_level, light.backyard_lights_level, light.mayas_bedroom, light.master_bedroom, light.back_door_light_level, switch.outdoor_switch_switch
+#      - service: notify.notify_REDACTED
+#        data:
+#          title: 'Sunrise'
+#          message: 'Daylight is burning! Outside lights turned off.'
+
+# MIGRATED TO NODE-RED
+#  - alias: Mayas Night Light
+#    initial_state: 'on'
+#    hide_entity: False
+#    trigger:
+#        platform: time
+#        at: '19:00'
+#    action:
+#      - service: light.turn_on
+#        data:
+#          entity_id: light.mayas_bedroom
+#          brightness: 2
+#          color_temp: 156
+#          rgb_color: 83,27,105
+
+# MIGRATED TO NODE-RED
+#  - alias: Goodnight
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.trigger_goodnight
+#        to: 'on'
+#    action:
+#      - service: script.turn_on
+#        entity_id: script.goodnight
+
+#  - alias: Girls in bed
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.trigger_girls_in_bed
+#        to: 'on'
+#    action:
+#      - service: script.turn_on
+#        entity_id: script.girls_in_bed
+        
+#  - alias: Girls Bedtime Routine
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.trigger_girls_bedtime_routine
+#        to: 'on'
+#    action:
+#      - service: script.turn_on
+#        entity_id: script.girls_bedtime_routine
+
+  - alias: Office Alarm
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.office_motion
+        to: 'on'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Alert!'
+          message: 'Motion Detected in Sunroom'
+    condition:
+        condition: state
+        entity_id: input_boolean.trigger_alarm_mode
+        state: 'on'
+
+  - alias: Turn Off Computer
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.turn_off_computer
+        to: 'on'
+    action:
+      service: hassio.addon_stdin
+      data:
+        addon: core_rpc_shutdown
+        input: htpc
+        
+  - alias: Reset Computer Off Trigger
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: switch.plex_server
+        to: 'off'
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.turn_off_computer
+
+  - alias: Goodnight when Chris is Away
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.trigger_goodnight
+        to: 'on'
+    action:
+      - service: script.turn_on
+        entity_id: script.goodnight_chris_away
+    condition:
+      - condition: state
+        entity_id: device_tracker.chrisiphone
+        state: not_home
+
+# MIGRATED TO NODE RED        
+#  - alias: Good morning
+#    initial_state: 'on'
+#    hide_entity: False
+#    trigger:    
+#        platform: state
+#        entity_id: light.living_room
+#        to: 'on'
+#    condition:
+#      - condition: and
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.trigger_first_morning
+#            state: 'on'
+#          - condition: time
+#            before: '8:00'
+#            after: '4:00'
+#    action:
+#      - service: script.turn_on
+#        entity_id: script.goodmorning
+
+# MIGRATED TO NODE RED
+#  - alias: Office Light Motion Trigger On
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: binary_sensor.office_motion
+#        to: 'on'
+#    action: 
+#      service: light.turn_on
+#      entity_id: light.office
+#    condition:
+#      - condition: and
+#        conditions:
+#          - condition: state
+#            entity_id: light.office
+#            state: 'off'
+#          - condition: sun
+#            after: sunset
+
+# MIGRATED TO NODE RED  
+#  - alias: Office Light Motion Trigger Off 
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: binary_sensor.office_motion
+#        to: 'off'
+#        for:
+#          minutes: 10
+#    action: 
+#      service: light.turn_off
+#      entity_id: light.office
+#    condition:
+#      - condition: and
+#        conditions:
+#          - condition: sun
+#            after: sunset
+#          - condition: time
+#            after: '17:30:00'
+
+  - alias: Vacation Trigger
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.vacation_mode
+        to: 'on'
+    action:
+      service: script.turn_on
+      entity_id: script.vacationmode 
+
+#  - alias: Guest Mode
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.guest_mode
+#        to: 'on'
+#    action:
+#      service: script.turn_on
+#      entity_id: script.guestmode
+
+#  - alias: Home Mode
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.home_mode
+#        to: 'on'
+#    action:
+#      service: script.turn_on
+#      entity_id: script.homemode
+
+  - alias: iPhone Triggered Home
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: device_tracker.amandaiphone
+        from: 'not_home'
+        to: 'home'
+      - platform: state
+        entity_id: device_tracker.chrisiphone
+        from: 'not_home'
+        to: 'home'
+    action:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.REDACTEDbee
+          away_mode: false
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Welcome back!'
+          message: 'Home mode enabled'
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.trigger_away_mode
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.trigger_alarm_mode 
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.4'
+            what: 'Welcome Home'
+    condition:
+        condition: state
+        entity_id: sensor.away_mode
+        state: 'on'
+
+  - alias: iPhone Triggered Away Before Sunset
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: group.devices
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 20
+    action:
+      - service: script.turn_on
+        entity_id: script.away_mode_before_sunset
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.trigger_away_mode
+    condition:
+        condition: and
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.REDACTEDbee_occupancy
+            state: 'off'
+          - condition: state
+            entity_id: sensor.away_mode
+            state: 'off'
+          - condition: state
+            entity_id: sun.sun
+            state: 'above_horizon'
+#          - condition: state
+#            entity_id: binary_sensor.living_room_occupancy
+#            state: 'off'
+
+  - alias: iPhone Triggered Away After Sunset
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: group.devices
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 20
+    action:
+      - service: script.turn_on
+        entity_id: script.away_mode_after_sunset
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.trigger_away_mode
+    condition:
+        condition: and
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.REDACTEDbee_occupancy
+            state: 'off'
+          - condition: state
+            entity_id: sensor.away_mode
+            state: 'off'
+          - condition: state
+            entity_id: sun.sun
+            state: 'below_horizon'
+#          - condition: state
+#            entity_id: binary_sensor.living_room_occupancy
+#            state: 'off'
+
+#  - alias: Away After Sunset
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.trigger_away_mode
+#        to: 'on'
+#    action:
+#      - service: script.turn_on
+#        entity_id: script.away_mode_after_sunset
+#      - service: input_boolean.turn_on
+#        entity_id: input_boolean.trigger_away_mode
+#    condition:
+#        condition: state
+#        entity_id: sun.sun
+#        state: 'below_horizon'
+
+#  - alias: Away Before Sunset
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.trigger_away_mode
+#        to: 'on'
+#    action:
+#      - service: script.turn_on
+#        entity_id: script.away_mode_before_sunset
+#      - service: input_boolean.turn_on
+#        entity_id: input_boolean.trigger_away_mode
+#    condition:
+#        condition: state
+#        entity_id: sun.sun
+#        state: 'above_horizon'
+
+#  - alias: Ecobee Triggered Away After Sunset
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: sensor.away_mode
+#        to: 'on'
+#    action:
+#      - service: scene.turn_on
+#        entity_id: scene.away_after_sunset
+#      - service: notify.notify_REDACTED
+#        data:
+#          title: 'ecoSB afSunset'
+#          message: 'ecobSB + Nlight'
+#      - service: input_boolean.turn_on
+#        entity_id: input_boolean.trigger_away_mode
+#    condition:
+#        condition: state
+#        entity_id: sun.sun
+#        state: 'below_horizon'
+
+#  - alias: Ecobee Triggered Away Before Sunset
+#    initial_state: 'on'
+#    trigger:
+#        platform: state
+#        entity_id: sensor.away_mode
+#        to: 'on'
+#    action:
+#      - service: scene.turn_on
+#        entity_id: scene.away_before_sunset
+#      - service: notify.notify_REDACTED
+#        data:
+#          title: 'ecoSB bfSunset'
+#          message: 'ecobSB + lights off'
+#      - service: input_boolean.turn_on
+#        entity_id: input_boolean.trigger_away_mode
+#    condition:
+#        condition: state
+#        entity_id: sun.sun
+#        state: 'above_horizon'
+
+# MIGRATED TO NODE RED
+#  - alias: Check Away Mode at Sunset
+#    initial_state: 'on'
+#    hide_entity: False
+#    trigger:
+#        platform: state
+#        entity_id: sun.sun
+#        to: 'below_horizon'
+#    action:
+#      - service: scene.turn_on
+#        entity_id: scene.away_after_sunset
+#      - service: notify.notify_REDACTED
+#        data:
+#          message: 'Away lighting scene turned on'
+#    condition:
+#        condition: and
+#        conditions: 
+#          - condition: state
+#            entity_id: sensor.away_mode
+#            state: 'on'
+#          - condition: state
+#            entity_id: light.dining_room_light_level
+#            state: 'off'
+
+### Harmony Hub ###
+
+  - alias: Basement Harmony activity through HA
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_select.basement_tv
+    action:
+      service: script.turn_on
+      entity_id: script.basement_harmony
+
+  - alias: Living Room Harmony activity through HA
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: input_select.living_room_tv
+    action:
+      service: script.turn_on
+      entity_id: script.living_room_harmony
+
+  - alias: Watch TV started from Harmony Hub
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: remote.basement_harmony
+    condition:
+      condition: template
+      value_template: '{{ trigger.to_state.attributes.current_activity == "Watch TV on Xbox" }}'
+    action:
+      service: input_select.select_option
+      entity_id: input_select.basement_tv
+      data:
+        option: "Watch TV on Xbox"
+
+  - alias: Cast started from Harmony Hub
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: remote.basement_harmony
+    condition:
+      condition: template
+      value_template: '{{ trigger.to_state.attributes.current_activity == "Cast to TV" }}'
+    action:
+      service: input_select.select_option
+      entity_id: input_select.basement_tv
+      data:
+        option: "Cast to TV"
+
+### Z-Wave ###
+
+  - alias: zwave heal at 2:30am
+    initial_state: 'on'
+    trigger:
+      platform: time
+      at: '2:30:00'
+    action:
+      service: zwave.heal_network
+
+#  - alias: Hide living room chromecast while not playing
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: media_player.living_room
+#        to: 'off'
+#      - platform: event
+#        event_type: homeassistant_start
+#    action:
+#      service: group.set_visibility
+#      entity_id: group.livingroom_cast
+#      data:
+#        visible: False
+
+# - alias: Show livingroom chromecast while playing
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      platform: state
+#      entity_id: media_player.living_room
+#      to: 'playing'
+#    action:
+#      service: group.set_visibility
+#      entity_id: group.livingroom_cast
+#      data:
+#        visible: True
+
+  - alias: Amanda Away
+    initial_state: 'on'
+    trigger: 
+      - platform: state
+        entity_id: device_tracker.amandaiphone
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 5
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Amanda Away'
+          message: 'Be back soon'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.5'
+            what: 'Amanda has left the house'
+    condition:
+      - condition: state
+        entity_id: device_tracker.chrisiphone
+        state: 'home'
+      - condition: state
+        entity_id: sensor.away_mode
+        state: 'off'
+
+  - alias: Chris Away
+    initial_state: 'on'
+    trigger: 
+      - platform: state
+        entity_id: device_tracker.chrisiphone
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 5
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Chris Away'
+          message: 'Be back soon'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.4'
+            what: 'Chris has left the house'
+    condition:
+      - condition: state
+        entity_id: device_tracker.amandaiphone
+        state: 'home'
+      - condition: state
+        entity_id: sensor.away_mode
+        state: 'off'
+
+# SECURITY
+  - alias: Occupancy Detected In Kitchen When Away
+    initial_state: 'on'
+    trigger: 
+        platform: state
+        entity_id: binary_sensor.REDACTEDbee_occupancy
+        to: 'on'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Security Alert'
+          message: 'Occupancy detected in the kitchen'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.5'
+            what: 'Trespasser Alert. Please confirm your identity.'
+    condition:
+      - condition: state
+        entity_id: sensor.away_mode
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.trigger_alarm_mode
+        state: 'on'
+
+  - alias: Occupancy Detected In Mayas Bedroom When Away
+    initial_state: 'on'
+    trigger: 
+        platform: state
+        entity_id: binary_sensor.mayas_bedroom_occupancy
+        to: 'on'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Security Alert'
+          message: 'Occupancy detected in Mayas Bedroom'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.5'
+            what: 'Trespasser Alert. Please confirm your identity.'
+    condition:
+      - condition: state
+        entity_id: sensor.away_mode
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.trigger_alarm_mode
+        state: 'on'
+
+  - alias: Occupancy Detected In Morgans Bedroom When Away
+    initial_state: 'on'
+    trigger: 
+        platform: state
+        entity_id: binary_sensor.morgans_bedroom_occupancy
+        to: 'on'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Security Alert'
+          message: 'Occupancy detected in Morgans Bedroom'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.5'
+            what: 'Trespasser Alert. Please confirm your identity.'
+    condition:
+      - condition: state
+        entity_id: sensor.away_mode
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.trigger_alarm_mode
+        state: 'on'
+
+# NOTIFICATIONS
+#  - alias: Mayas room is warm
+#    initial_state: 'on'
+#    trigger: 
+#      - platform: numeric_state
+#        entity_id: sensor.mayas_bedroom_temperature
+#        above: '80'
+#        for:
+#          minutes: 10
+#    action:
+#      - service: notify.notify_REDACTED
+#        data:
+#          title: 'Mayas Bedroom is Warm'
+#          message: 'Cool it down!'
+#      - service: script.turn_on
+#        entity_id: script.say
+#        data:
+#          variables:
+#            master: 'media_player.kitchen'
+#            where: 'media_player.kitchen'
+#            volume: '.3'
+#            what: 'Mayas bedroom is above 80 degrees'
+#    condition:
+#      condition: state
+#      entity_id: sensor.away_mode
+#      state: 'off'
+          
+  - alias: Morgans room is warm
+    initial_state: 'on'
+    trigger: 
+      - platform: numeric_state
+        entity_id: sensor.morgans_bedroom_temperature
+        above: '80'
+        for:
+          minutes: 10
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Morgans Bedroom is Warm'
+          message: 'Cool it down!'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.3'
+            what: 'Morgans bedroom is above 80 degrees'
+    condition:
+      condition: state
+      entity_id: sensor.away_mode
+      state: 'off'
+          
+  - alias: Mayas room is cold
+    initial_state: 'on'
+    trigger: 
+      - platform: numeric_state
+        entity_id: sensor.mayas_bedroom_temperature
+        below: '65'
+        for:
+          minutes: 10
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Mayas Bedroom is Cold'
+          message: 'Warm it up!'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.3'
+            what: 'Mayas bedroom is below 66 degrees'
+    condition:
+      condition: state
+      entity_id: sensor.away_mode
+      state: 'off'
+          
+  - alias: Morgans room is cold
+    initial_state: 'on'
+    trigger: 
+      - platform: numeric_state
+        entity_id: sensor.morgans_bedroom_temperature
+        below: '65'
+        for:
+          minutes: '10'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Morgans Bedroom is Cold'
+          message: 'Warm it up!'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.3'
+            what: 'Morgans bedroom is below 66 degrees'
+    condition:
+      condition: state
+      entity_id: sensor.away_mode
+      state: 'off'
+
+  - alias: Office is cold
+    initial_state: 'on'
+    trigger: 
+      - platform: numeric_state
+        entity_id: sensor.office_temperature
+        below: '40'
+        for:
+          minutes: 10
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'The Office is Cold'
+          message: 'Warm it up!'
+      - service: script.turn_on
+        entity_id: script.say
+        data:
+          variables:
+            master: 'media_player.kitchen'
+            where: 'media_player.kitchen'
+            volume: '.3'
+            what: 'The office is below 42 degrees'
+
+  - alias: Back Door Zwave Light Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.back_door_light
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Back Door Zwave Light Dead'
+
+  - alias: Backyard Zwave Light Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.backyard_lights
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Backyard Zwave Light Dead'
+
+  - alias: Dining Room Zwave Light Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.dining_room_light
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Dining Room Zwave Light Dead'
+
+  - alias: Kitchen Room Zwave Light Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.kitchen_can_lights
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Kitchen Zwave Light Dead'
+
+  - alias: Front Basement Zwave Light Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.front_basement_light
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Front Basement Zwave Light Dead'
+
+  - alias: Kitchen Hallway Zwave Light Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.kitchen_hallway_light
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Kitchen Hallway Zwave Light Dead'
+
+  - alias: Kitchen Sink Light Zwave Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.kitchen_sink_light
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Kitchen Sink Zwave Light Dead'
+
+  - alias: Back Basement Light Zwave Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.rear_basement_lights
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Back Basement Zwave Light Dead'
+
+  - alias: Pendant Light Zwave Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.pendant_lights
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Pendant Zwave Light Dead'
+
+  - alias: Side Door Light Zwave Alert
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: zwave.side_door_light
+        to: 'dead'
+    action:
+      - service: notify.notify_REDACTED
+        data:
+          title: 'Zwave Node Down'
+          message: 'Side Door Light Dead'
+
+  - alias: 'Push Notify Action'
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: ios.notification_action_fired
+        event_data:
+          actionName: BASEMENT_LIGHTS_OFF
+    action:
+      service: homeassistant.turn_off
+      entity_id: group.all_basement_lights
+
