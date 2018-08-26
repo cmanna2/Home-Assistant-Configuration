@@ -1,11 +1,46 @@
+  - name: 100 W Tungsten Outdoor Light
+    entities:
+        light.aeotec_zw098_led_bulb_level:
+            state: on
+            brightness: 250
+            rgb_color: [255,214,170]
+
+  - name: White Outdoor Light
+    entities:
+        light.aeotec_zw098_led_bulb_level:
+            state: on
+            brightness: 250
+            rgb_color: [245,245,245]
+
+  - name: Green Outdoor Light
+    entities:
+        light.aeotec_zw098_led_bulb_level:
+            state: on
+            brightness: 250
+            rgb_color: [0,255,0]
+
+  - name: Blue Outdoor Light
+    entities:
+        light.aeotec_zw098_led_bulb_level:
+            state: on
+            brightness: 250
+            rgb_color: [0,0,255]
+
+  - name: Red Outdoor Light
+    entities:
+        light.aeotec_zw098_led_bulb_level:
+            state: on
+            brightness: 250
+            rgb_color: [255,0,0]
+
   - name: Away After Sunset
     entities:
-        switch.kitchen_hallway_switch_7_0:
+        switch.kitchen_hallway_light_switch:
             state: on
-        light.dining_room_light_level_6_0:
+        light.dining_room_light_level:
             state: on
-            brightness: 50
-        light.kitchen_sink_light_level_4_0:
+            brightness: 30
+        light.kitchen_sink_light_level:
             state: on
             brightness: 50
 
@@ -16,9 +51,9 @@
 
   - name: Netflix and Chill
     entities:
-        light.rear_basement_lights_level_8_0: off
-        light.front_basement_lights_level_9_0: off
-        switch.kitchen_hallway_switch_7_0:
+        light.rear_basement_lights_level: off
+        light.front_basement_lights_level: off
+        switch.kitchen_hallway_light_switch:
             state: on
         light.basement_accent:
             state: on
@@ -29,52 +64,76 @@
             
   - name: First Floor Nightlight
     entities:
-        light.kitchen_sink_light_level_4_0:
+        light.kitchen_sink_light_level:
             state: on
             brightness: 30
         light.kitchen_accent:
             state: on
             brightness: 75
-        light.kitchen_lights_level_5_0: off
-        light.pendant_lights_level_3_0: off
-        light.dining_room_light_level_6_0: off
+            rgb_color: [253, 251, 226]
+        light.kitchen_lights_level: off
+        light.pendant_lights_level: off
+        light.dining_room_light_level: off
 
   - name: Goodmorning
     entities:
-        light.kitchen_lights_level_5_0:
+        light.kitchen_can_lights_level:
             state: on
             brightness: 30
-        light.living_room:
+        light.living:
             state: on
             brightness: 50
-        light.dining_room_light_level_6_0:
+        light.dining_room_light_level:
             state: on
             brightness: 30
 
   - name: Goodnight
     entities:
-        light.pendant_lights_level_3_0: off
-        light.kitchen_sink_light_level_4_0: off
-        light.kitchen_lights_level_5_0: off
-        light.dining_room_light_level_6_0: off
-        light.rear_basement_lights_level_8_0: off
-        light.front_basement_lights_level_9_0: off
+        light.pendant_lights_level: off
+        light.kitchen_sink_light_level: off
+        light.kitchen_can_lights_level: off
+        light.dining_room_light_level: off
+        light.rear_basement_lights_level: off
+        light.front_basement_light_level: off
+        light.stairwell_light_level: off
+        light.upstairs_hallway_light_level: off
         light.kitchen_accent: off
         light.basement_stairs: off
         light.basement_accent: off
-        light.living_room: off
+        light.office: off
         light.master_bedroom: off
-        switch.kitchen_hallway_switch_7_0: off
-        switch.maya_basement_outlet_switch_14_0: off
+        light.living_room: off
+        switch.kitchen_hallway_light_switch: off
+        switch.maya_basement_outlet_switch: off
+        switch.wemo_switch: off
 
   - name: Outdoor
     entities:
-        light.side_door_light_level_11_0:
+        light.side_door_light_level:
             state: on
-            brightness: 99
-        light.backyard_lights_level_13_0:
+            brightness: 254
+        light.backyard_lights_level:
             state: on
             brightness: 20
-        light.aeotec_zw098_led_bulb_level_2_0:
+        light.back_door_light_level:
             state: on
-            brightness: 99
+            brightness: 33
+        switch.outdoor_switch_switch: on
+
+  - name: First Floor Lights
+    entities:
+        light.pendant_lights_level: off
+        light.kitchen_sink_light_level: off
+        light.kitchen_lights_level: off
+        light.dining_room_light_level: off
+        light.kitchen_accent: off
+        light.living_room: off
+
+  - name: All Basement Lights
+    entities:
+        light.rear_basement_lights_level: off
+        light.front_basement_lights_level: off
+        light.basement_stairs: off
+        light.basement_accent: off
+        switch.maya_basement_outlet_switch: off
+        switch.wemo_switch: off
