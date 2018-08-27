@@ -1,4 +1,4 @@
-# Home Assistant Config (0.73)
+# Home Assistant Config (0.76.2)
 Home Assistant Configuration on Intel Nuc
 
 ## Hubs (Hardware/Software)
