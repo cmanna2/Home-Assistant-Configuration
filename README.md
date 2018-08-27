@@ -94,3 +94,5 @@ Home Assistant Configuration on Intel Nuc
 
 ### Zwave
 * Heal the zwave network at 2:30am
+
+![alt text] https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/Main.PNG
