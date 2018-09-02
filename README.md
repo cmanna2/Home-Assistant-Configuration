@@ -37,9 +37,13 @@ Home Assistant Configuration on Intel Nuc
 * GE zwave light switches (motion sensing, paddle)
 * Aeotec Zwave LED Light
 
+## Locks
+* Schlage Connect Zwave
+
 ## Sensors
 * Hue motion sensor
 * Zooz zwave multisensor
+* Monoprice zwave door sensor
 
 ## Switches
 * GE zwave outlets
@@ -67,9 +71,10 @@ Home Assistant Configuration on Intel Nuc
 
 ## Garage
 * GoControl Zwave Garage Relay
+* Monoprice Zwave Tilt Sensor
 
 ## Smoke/CO Detection
-* 2x First Alert 2-in-1 Z-Wave Smoke Detector & Carbon Monoxide Alarm
+* 2x First Alert 2-in-1 Zwave Smoke Detector & Carbon Monoxide Alarm
 * 2x Nest Protect
 
 
