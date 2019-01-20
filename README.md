@@ -1,4 +1,7 @@
-# Home Assistant Config (0.76.2)
+# High Level Smart Home Architecture / Integrations
+![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/6CAB72E9-F94A-4A54-A499-5FAAC25F0804.png)
+
+# Home Assistant Config (0.84.6)
 Home Assistant Configuration on Intel Nuc
 
 ## Hubs (Hardware/Software)
