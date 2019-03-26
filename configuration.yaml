@@ -1,5 +1,5 @@
 homeassistant:
-  name: REDACTED Abode
+  name: REDACTED
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
@@ -9,6 +9,14 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Chicago
   customize: !include customize.yaml
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
+     api_password: !secret api_password
+   - type: trusted_networks
+     trusted_networks:
+       - REDACTED.6
+       - REDACTED.7
 
 zone:
   - name: Home
@@ -18,11 +26,11 @@ zone:
     icon: mdi:account-multiple
   
 frontend:
-  javascript_version: latest
   themes: !include themes.yaml
 
-config:
-  
+lovelace:
+  mode: yaml
+
 sensor: !include sensors.yaml
 
 input_boolean: !include input_boolean.yaml
@@ -38,12 +46,12 @@ automation: !include automations.yaml
 scene: !include scenes.yaml
 
 group: !include groups.yaml
-  
-http:
-  api_password: !secret api_password
-  trusted_networks:
-    - REDACTED.6
-    - REDACTED.7
+
+#http:
+#  api_password: !secret api_password
+#  trusted_networks:
+#    - REDACTED.6
+#    - REDACTED.7
 # Checks for available updates
 updater:
 
@@ -94,19 +102,29 @@ logbook:
 
 sun:
 
+# Weather Prediction
+
 tts:
   platform: google
 
 wemo:
+  discovery: false
   static:
-    - REDACTED.28
-    - REDACTED.29
+    - REDACTED.XX
+    - REDACTED.XX
+    - REDACTED.XX
 
 hue:
   bridges:
-  - host: REDACTED.23
+  - host: REDACTED.XX
     allow_unreachable: true
     allow_hue_groups: false
+
+tplink:
+  discovery: false
+  switch:
+    - host: REDACTED.XX
+    - host: REDACTED.XX
 
 media_player:
   - platform: roku
@@ -114,9 +132,10 @@ media_player:
 sonos:
   media_player:
     hosts:
-      - REDACTED.8
-      - REDACTED.9
-      - REDACTED.10
+      - REDACTED.XX
+      - REDACTED.XX
+      - REDACTED.XX
+      - REDACTED.XX
 
 zwave:
   usb_path: /dev/ttyACM0
@@ -142,12 +161,18 @@ zwave:
     light.dining_room_light_level:
       refresh_value: true
       polling_intensity: 1
-    light.stairwell_ight_level:
+    light.stairwell_light_level:
       refresh_value: true
       polling_intensity: 1
     light.upstairs_hallway_light_level:
       refresh_value: true
-      polling_intensity: 1 
+      polling_intensity: 1
+    switch.outdoor_switch:
+      refresh_value: true
+      polling_intensity: 1
+    fan.office:
+      refresh_value: true
+      polling_intensity: 1
 
 ecobee:
   api_key: !secret ecobee_api
@@ -161,55 +186,106 @@ nest:
   client_secret: !secret nest_client_secret
 
 emulated_hue:
-  host_ip: REDACTED.73
+  host_ip: REDACTED.XX
   listen_port: 8300
   off_maps_to_on_domains:
     - script
     - scene
   expose_by_default: false
 
-#homekit:
-#  filter:
-#    include_domains:
-#      - light
-#      - media_player
-#  entity_config:
-#    light.kitchen_can_lights_level:
-#      name: Kitchen Lights
-#    light.kitchen_sink_light_level:
-#      name: Kitchen Sink Light
-#    light.dining_room_light_level:
-#      name: Dining Room Light
-#    light.front_basement_light_level:
-#      name: Front Basement Lights
-#    light.rear_basement_lights_level:
-#      name: Back Basement Lights
-#    light.side_door_light_level:
-#      name: Side Door Light
-#    light.backyard_lights_level:
-#      name: Backyard Lights
-#    light.aeotec_zw098_led_bulb_level:
-#      name: Furnace Room Light
-#    light.pendant_lights_level:
-#      name: Pendant Light
-#    light.back_door_light_level:
-#      name: Back Door Light
-#    light.upstairs_hallway_light_level:
-#      name: Upstairs Hallway Light
-#    light.stairway_light_level:
-#      name: Stairway Light
+homekit:
+  auto_start: False
+  filter:
+    include_entities:
+      - light.kitchen_can_lights_level
+      - light.kitchen_sink_light_level
+      - light.dining_room_light_level
+      - light.front_basement_light_level
+      - light.rear_basement_lights_level
+      - light.backyard_lights_level
+      - light.side_door_light_level
+      - light.back_door_light_level
+      - light.furnace_room_light_level
+      - light.pendant_lights_level
+      - light.upstairs_hallway_light_level
+      - light.stairwell_light_level
+      - light.builtin
+      - lock.front_door_lock
+      - switch.garage_door_switch
+      - input_boolean.trigger_away_mode
+      - input_boolean.trigger_alarm_mode
+      - input_boolean.trigger_goodnight
+      - input_boolean.turn_off_computer
+      - input_boolean.trigger_girls_bedtime_routine
+      - input_boolean.turn_on_living_room_roku
+      - input_boolean.turn_off_living_room_tv
+      - input_boolean.turn_on_xbox
+      - input_boolean.turn_off_basement_tv
+      - switch.basement_switch
+      - switch.kitchen_hallway_light
+      - switch.wemo_switch
+      - switch.mayas_humidifier
+      - switch.morgans_humidifier
+      - switch.outdoor_switch
+      - switch.wemomini1
+  entity_config:
+    light.kitchen_can_lights_level:
+      name: Kitchen Lights
+    light.kitchen_sink_light_level:
+      name: Kitchen Sink Light
+    light.dining_room_light_level:
+      name: Dining Room Light
+    light.front_basement_light_level:
+      name: Front Basement Lights
+    light.rear_basement_lights_level:
+      name: Back Basement Lights
+    light.side_door_light_level:
+      name: Side Door Light
+    light.backyard_lights_level:
+      name: Backyard Lights
+    light.furnace_room_light_level:
+      name: Furnace Room Light
+    light.pendant_lights_level:
+      name: Pendant Light
+    light.back_door_light_level:
+      name: Back Door Light
+    light.upstairs_hallway_light_level:
+      name: Upstairs Hallway Light
+    light.stairwell_light_level:
+      name: Stairway Light
+    light.builtin:
+      name: Built-in
+    lock.front_door_lock:
+      name: Front Door Lock
+      code: 1325
+    switch.garage_door_switch:
+      name: Garage Door
+    switch.outdoor_switch:
+      name: Outdoor Switch
+    switch.wemomini1:
+      name: Printer
+    input_boolean.trigger_away_mode:
+      name: Away mode
+    input_boolean.trigger_alarm_mode:
+      name: Alarm mode
+    input_boolean.trigger_goodnight:
+      name: Goodnight
+    input_boolean.trigger_girls_bedtime_routine:
+      name: Girls bedtime routine
+    input_boolean.turn_on_living_room_roku:
+      name: Living Room Roku
+    input_boolean.turn_off_living_room_tv:
+      name: Living Room TV Off
 
 notify:
-  - platform: pushbullet
+  - name: REDACTED_pushbullet
+    platform: pushbullet
     api_key: !secret pushbullet_api
-    name: REDACTED_pushbullet
-  - platform: ios
-  - name: notify_REDACTED
+  - name: ios_group
     platform: group
     services:
-      - service: ios_REDACTED_iphone
-      - service: ios_REDACTED_iphone
-      - service: REDACTED_pushbullet
+      - service: ios_REDACTEDs_iphone
+      - service: ios_REDACTEDs_iphone
 
 remote:
   - platform: harmony
@@ -219,13 +295,18 @@ remote:
 
 device_tracker:
   - platform: unifi
-    host: REDACTED.73
+    host: REDACTED.XX
+    port: 8443
     username: !secret unifi_user
     password: !secret unifi_pass
+    site_id: REDACTED
     consider_home: 300
     interval_seconds: 12
     verify_ssl: false
 
+config:
+
+system_health:
 
 ios:
   push:
@@ -242,17 +323,36 @@ ios:
 
 camera:
   - platform: amcrest
+  - platform: mjpeg
+    mjpeg_url: http://REDACTED.59:8081/
+    name: officecamera
+    username: !secret officecam_user
+    password: !secret officecam_pass
 
 amcrest:
-  - host: REDACTED.25
-    username: !secret amcrest1_user
-    password: !secret amcrest1_pass
+#  - host: REDACTED.25
+#    username: !secret mayacamera_user
+#    password: !secret mayacamera_pass
+#    name: mayacamera
+#    resolution: high
+#    sensors:
+#      - motion_detector
+  - host: REDACTED.XX
+    username: !secret morgancamera_user
+    password: !secret morgancamera_pass
+    name: morgancamera
     resolution: high
-  - host: REDACTED.26
-    username: !secret amcrest2_user
-    password: !secret amcrest2_pass
+    sensors:
+      - motion_detector
+  - host: REDACTED.XX
+    username: !secret drivewaycamera_user
+    password: !secret drivewaycamera_pass
+    name: drivewaycamera
     resolution: high
+    sensors:
+      - motion_detector
+
 
 influxdb:
-  host: REDACTED.73
+  host: REDACTED.XX
   database: home_assistant
