@@ -41,9 +41,11 @@ Home Assistant Configuration on Intel Nuc
 * 1 Echo Input
 
 ## Lighting
-* Hue color changing bulbs
+* Hue bulbs (color)
 * Hue lightstrip
+* Hue Play bar
 * GE zwave light switches (motion sensing, paddle)
+* Ikea Stromlinje (integrated to Hue hub)
 * Aeotec Zwave LED Light
 
 ## Locks
@@ -52,19 +54,22 @@ Home Assistant Configuration on Intel Nuc
 ## Sensors
 * Hue motion sensor
 * Zooz zwave multisensor
-* Monoprice zwave door sensor
+* Monoprice zwave door sensor(s)
+* Belkin Wemo motion sensor
 
 ## Switches
 * GE zwave outlets
 * GE zwave outdoor switch
-* Belkin Wemo switch + motion sensor
-* TPLink Switch
+* Belkin WemoMini switches
+* TPLink switches
+* Alexa switces
 
 ## Media
 * Plex Media Server
+* Apple TV 4k
 * Chromecast
 * Roku 3
-* Xbox 360
+* Xbox One S
 
 ## Audio
 * Sonos Play 5
@@ -78,7 +83,6 @@ Home Assistant Configuration on Intel Nuc
 
 ## Presence Detection
 * Unifi Controller
-* Nmap
 
 ## Garage
 * GoControl Zwave Garage Relay
