@@ -84,7 +84,7 @@ Home Assistant Configuration on Intel Nuc
 * 2x Nest Protect
 
 ### Sample Screenshots
-![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/Main.PNG)
+![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/045FFA9A-86DC-4A6A-8F9A-9E80E41EDC94.jpeg)
 
 ![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/1st%20floor.PNG)
 
