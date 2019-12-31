@@ -1,6 +1,11 @@
 # Conceptual Smart Home Architecture / Integrations
 ![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/9B94BFD0-4A6F-4B91-969A-C0219C7BC23A.jpeg)
 
+### Sample Screenshots
+![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/045FFA9A-86DC-4A6A-8F9A-9E80E41EDC94.jpeg)
+
+![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/B53AC856-4ED9-4EB1-BC4F-63E44AACDB03.jpeg)
+
 # Home Assistant Config (0.90.1)
 Home Assistant Configuration on Intel Nuc
 
@@ -82,10 +87,3 @@ Home Assistant Configuration on Intel Nuc
 ## Smoke/CO Detection
 * 2x First Alert 2-in-1 Zwave Smoke Detector & Carbon Monoxide Alarm
 * 2x Nest Protect
-
-### Sample Screenshots
-![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/045FFA9A-86DC-4A6A-8F9A-9E80E41EDC94.jpeg)
-
-![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/1st%20floor.PNG)
-
-![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/2nd%20floor.PNG)
