@@ -98,21 +98,21 @@ Shortcuts provides a great tool to round out automations that include smart home
 A few of my favorite Shortcuts are below including a screenshot of all the shortcuts I am currently using.
 * Find my backpack/keys/AirPods (Tile Pros w/ replaceable batteries) - Although I don’t use it often, being able to ask Siri where my keys are and have the Tile ring in response is pretty great
 * Good morning - Currently this shortcut is not automated due to the variable morning schedules across the family but I intend to try to find a way to automate it without too many edge cases in the future.  When triggered the shortcut:
-** Sets a morning lighting scene on the first floor by calling a scene configured in the Home app
-** Turns off my Alarm and Goodnight modes
-** Wakes up the living room Apple TV
-** Opens the Channels App
-** Sets channel 9.1 (WGN)
+  * Sets a morning lighting scene on the first floor by calling a scene configured in the Home app
+  * Turns off my Alarm and Goodnight modes
+  * Wakes up the living room Apple TV
+  * Opens the Channels App
+  * Sets channel 9.1 (WGN)
 * Away Mode - We use this every day when we leave the house
-** Turns off any lights that are still on in the house
-** Turns off the Apple TV if its on
-** Closes the garage door if its open
-** Locks the front door
-** Enables notifications from certain motion sensors in the house 
+  * Turns off any lights that are still on in the house
+  * Turns off the Apple TV if its on
+  * Closes the garage door if its open
+  * Locks the front door
+  * Enables notifications from certain motion sensors in the house 
 * Girls Playlist Basement
-** Enables Sonos through Harmony Hub which also turns on the Denon receiver
-** Gets the “Girls Playlist” from Apple Music
-** Sets the AirPlay playback destination to the Denon receiver and starts playback
+  * Enables Sonos through Harmony Hub which also turns on the Denon receiver
+  * Gets the “Girls Playlist” from Apple Music
+  * Sets the AirPlay playback destination to the Denon receiver and starts playback
 
 ![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/4DAF0DD8-DCB0-4D2E-8A59-15A45D84B4B4.jpeg)
 ![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/F5C04056-B8B3-4B20-8853-B32185BB11ED.jpeg)
