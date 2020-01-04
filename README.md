@@ -91,3 +91,7 @@ Home Assistant Configuration on Intel Nuc
 ## Smoke/CO Detection
 * 2x First Alert 2-in-1 Zwave Smoke Detector & Carbon Monoxide Alarm
 * 2x Nest Protect
+
+# Siri Shortcuts
+
+![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/39003706-12A6-41C4-BE9C-2E52DE3D4E28.jpeg)
