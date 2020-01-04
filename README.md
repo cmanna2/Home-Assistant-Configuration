@@ -95,4 +95,4 @@ Home Assistant Configuration on Intel Nuc
 # Siri Shortcuts
 
 ![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/4DAF0DD8-DCB0-4D2E-8A59-15A45D84B4B4.jpeg)
-![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/39003706-12A6-41C4-BE9C-2E52DE3D4E28.jpeg)
+![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/F5C04056-B8B3-4B20-8853-B32185BB11ED.jpeg)
