@@ -92,6 +92,16 @@ Home Assistant Configuration on Intel Nuc
 * 2x First Alert 2-in-1 Zwave Smoke Detector & Carbon Monoxide Alarm
 * 2x Nest Protect
 
+## NFC Tags
+Just for fun I use the following NFC tags from Amazon around the house for triggering automations: 
+
+* Timeskey NFC 10PCS NTAG 215 NFC Stickers NXP NTAG215 NFC Tags 100% Compatible with TagMo and Amiibo, 504 Bytes Memory Fully Programmable https://www.amazon.com/dp/B075CFXY8V/ref=cm_sw_r_cp_tai_H9reEb9V0EZDS
+
+* NFC tag on nightstand to trigger the Goodnight automation
+* NFC tag on the garage door keypad to open the garage door
+* NFC tag in car to trigger Away Mode before leaving
+
+
 # Siri Shortcuts
 Shortcuts provides a great tool to round out automations that include smart home devices and iOS device automations.  Well, that, and its simply fun to mess around with.  Shortcuts also has a iOS widget that gives quick access to a few smart home automations that I use often.  I find this more convenient than accessing the Home app via the Control Center.
 
