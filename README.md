@@ -6,13 +6,13 @@
 
 ![alt text](https://github.com/cmanna2/Home-Assistant-Configuration/blob/master/B53AC856-4ED9-4EB1-BC4F-63E44AACDB03.jpeg)
 
-# Home Assistant Config (0.90.1)
-Home Assistant Configuration on Intel Nuc
+# My Devices
+All of the smarts and parts used in my home are posted on kit.co (https://kit.co/cmanna2) and listed below:
 
 ## Hubs (Hardware/Software)
 * Intel Nuc (i3) with Aeotec Zwave Stick running Ubuntu 16.04 w/ Docker
   * Portainer
-  * Home Assistant (HassIO)
+  * Home Assistant (HassIO) v0.101.3
   * Unifi Controller
   * Node-red
   * Grafana
@@ -101,6 +101,34 @@ Just for fun I use the following NFC tags from Amazon around the house for trigg
 * NFC tag on the garage door keypad to open the garage door
 * NFC tag in car to trigger Away Mode before leaving
 
+# My Automations 
+When I first got into Home Assistant I set up all automations in default YAML.  Although YAML certainly works and writing most automations is pretty intuitive, I quickly adopted Node-RED when the add-on was released and migrated all automations over.  Node-RED is immensely more powerful and worth the learning curve.  Many of our key automations / “modes” are below:
+* Guest Mode 
+  * When a known wireless device (friend, relative, etc) connects to our home WiFi network, send a notification, play personalized song over Sonos, and enable Guest Mode.  Guest Mode disables certain automations related to lighting control and Away Mode triggering if we leave the house while someone else is still there (e.g. watching our girls).
+  * When no known guest wireless devices are seen on the network then Guest Mode turns off
+* Away Mode
+		* Away mode is manually triggered through Shortcuts or automatically if our family WiFi devices are not seen on the network  
+		* When Away Mode is enabled a lighting setback scene is called (during the day all lights turn off, after sunset an away lighting scene is set), garage door closes if it is open, front door locks, Ecobee sets back the temperature set point, and Alarm Mode enables
+		* When we return home from being away from the house and our phones re-connect to the WiFi, Home Mode is turned on and the front door unlocks
+* Alarm Mode (automatically triggered when certain modes are enabled)
+		* Select motion sensors (e.g. ecobee remote sensors, Belkin wemo sensor, ESPHome motion sensors) will trigger a notification if motion is detected when away
+* Time based lighting control
+		* At sunset the outdoor lights are turned on
+		* At sunrise all outdoor lights turn off and any indoor light or switch still on upstairs turns off
+* Motion based lighting control
+		* Office light turns on when motion is detected and light level (lux) is less than 50
+		* Master bedroom light turns on when motion is detected and it is after sunset.  When Goodnight Mode is enabled then this motion automation is disabled so the light does not turn on if someone gets up in the middle of the night
+		* Upstairs hallway light turns on to 10% (nightlight) when motion is detected after sunset
+		* When no motion is detected in any room with a motion sensor for 10 mins then all lights in the room turn off (auto-off)
+* Good morning (manually triggered via Shortcuts)
+		* Sets a morning lighting scene on the first floor by calling a scene configured in the Home app
+		* Turns off my Alarm and Goodnight modes
+		* Wakes up the living room Apple TV, opens the Channels App and sets channel 9.1 (WGN)
+* Vacation Mode
+		* Enables Away Mode, sets back Ecobee, and disables key automations that are part of Home Mode
+* Goodnight (manually triggered via Shortcuts or NFC tag on nightstand)
+		* When triggered, turns on Alarm Mode, disables certain motion activated lighting automations, closes front door if open, closes garage if open, turns off main server (Plex), and turns off all lights in the house
+		* When the girls go to sleep, telling Alexa the “girls are going to bed” turns on a Hue lamp as a nightlight, turns on a Wemo switch for their humidifier (turns on if home humidity is below 40%), and starts Alexa sleep sounds skill
 
 # Siri Shortcuts
 Shortcuts provides a great tool to round out automations that include smart home devices and iOS device automations.  Well, that, and its simply fun to mess around with.  Shortcuts also has a iOS widget that gives quick access to a few smart home automations that I use often.  I find this more convenient than accessing the Home app via the Control Center.
