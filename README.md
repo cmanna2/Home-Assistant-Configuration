@@ -39,6 +39,7 @@ All of the smarts and parts used in my home are posted on kit.co (https://kit.co
 ## Voice Control / Assistant
 * 5x Alexa Echo Dot
 * 1 Echo Input
+* Siri (Siri Shortcuts) via iOS devices
 
 ## Lighting
 * Hue bulbs (color)
@@ -47,6 +48,7 @@ All of the smarts and parts used in my home are posted on kit.co (https://kit.co
 * GE zwave light switches (motion sensing, paddle)
 * Ikea Stromlinje (integrated to Hue hub)
 * Aeotec Zwave LED Light
+* WLED with WS2812B LED's and ESP8266
 
 ## Locks
 * Schlage Connect Zwave
@@ -56,6 +58,7 @@ All of the smarts and parts used in my home are posted on kit.co (https://kit.co
 * Zooz zwave multisensor
 * Monoprice zwave door sensor(s)
 * Belkin Wemo motion sensor
+* ESPHome (ESP8266) temp and humidity
 
 ## Switches
 * GE zwave outlets
@@ -75,11 +78,11 @@ All of the smarts and parts used in my home are posted on kit.co (https://kit.co
 * Sonos Play 5
 * Sonos Play 1
 * Sonos Beam
-* Sonos Connect
 * Sonos Amp (Outdoor Speakers)
+* Sonos Move
 
 ## Notification
-* Pushbullet
+* Pushcuts (actionable notifications)
 
 ## Presence Detection
 * Unifi Controller
