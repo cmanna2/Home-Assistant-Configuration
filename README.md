@@ -26,12 +26,14 @@ All of the smarts and parts used in my home are posted on kit.co (https://kit.co
 * Unified Security Gateway
 * TPLink PoE Switch
 * RPi 2 running PiHole
+* Synology NAS
 
-## Security
+## Security (Logitech Circle 2 and Aqara cameras connected via HomeKit Secure Video with video storage in iCloud)
 * Amcrest IP2M-841EW PoE Camera
 * Amcrest IP2M-844E
 * Raspberry Pi Zero W w/ Camera Module
-* NVR - tinyCam recording to Dropbox
+* Logitech Circle 2 (x2)
+* Aqara G2H camera
 
 ## HVAC
 * Ecobee 3 w/ remote sensors
@@ -52,13 +54,16 @@ All of the smarts and parts used in my home are posted on kit.co (https://kit.co
 
 ## Locks
 * Schlage Connect Zwave
+* August Pro Gen 3 
 
 ## Sensors
 * Hue motion sensor
 * Zooz zwave multisensor
-* Monoprice zwave door sensor(s)
+* Monoprice zwave door sensors
 * Belkin Wemo motion sensor
 * ESPHome (ESP8266) temp and humidity
+* Aqara contact sensors
+* Aqara temperature/humidity sensors
 
 ## Switches
 * GE zwave outlets
